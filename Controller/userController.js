@@ -2,10 +2,23 @@ const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const axios = require('axios');
 const otpGenerator = require('otp-generator');
+const nodemailer = require("nodemailer");
 
 const {User} = require('../Model/userModel');
 const {Otp} = require('../Model/otpModel');
 
+// Node mailer
+const transporter = nodemailer.createTransport({
+    service: "Gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      // TODO: replace `user` and `pass` values from <https://forwardemail.net>
+      user: process.env.AUTH_EMAIL,
+      pass: process.env.AUTH_PASS,
+    },
+  });
 
 module.exports.signUp = async (req, res) => {
     const user = await User.findOne({
@@ -18,11 +31,21 @@ module.exports.signUp = async (req, res) => {
     const email = req.body.email;
     console.log(OTP);
 
+    const mailOptions = {
+        from: process.env.AUTH_EMAIL,
+        to: email,
+        subject: "Verify your email",
+        html: `<p>Your otp is ${OTP}</p>`
+    }
+
     const otp = new Otp({email: email, otp: OTP});
     const salt = await bcrypt.genSalt(10)
     otp.otp = await bcrypt.hash(otp.otp, salt);
     const result = await otp.save();
-    return res.status(200).send({message: "Otp sent succesfully"});
+    await  transporter.sendMail(mailOptions)
+                     .then(()=>{res.status(200).json({message:"Email has been sent!"})})
+                     .catch((err)=>{console.log("Error in sending Email : "+err)});
+    return;
 }
 
 module.exports.verifyOtp = async (req, res) => {
