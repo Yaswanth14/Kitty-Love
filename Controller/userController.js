@@ -29,6 +29,10 @@ module.exports.signUp = async (req, res) => {
         digits: true, lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false
     });
     const email = req.body.email;
+    const emailRegex = /^[a-zA-Z0-9]{10}@gvpce\.ac\.in$/;
+    if (!emailRegex.test(email)) {
+        return res.status(400).json({ message: 'Only domain mails are accepted' });
+    }
     console.log(OTP);
 
     const mailOptions = {
