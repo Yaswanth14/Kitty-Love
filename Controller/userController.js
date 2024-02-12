@@ -35,7 +35,50 @@ module.exports.signUp = async (req, res) => {
         from: process.env.AUTH_EMAIL,
         to: email,
         subject: "Verify your email",
-        html: `<p>Your otp is ${OTP}</p>`
+        html: `
+        <body style="background-color:grey"> 
+            <table align="center" border="0" cellpadding="0" cellspacing="0"
+                width="550" bgcolor="white" style="border:2px solid black"> 
+                <tbody> 
+                    <tr> 
+                        <td align="center"> 
+                            <table align="center" border="0" cellpadding="0"
+                                cellspacing="0" class="col-550" width="550"> 
+                                <tbody> 
+                                    <tr> 
+                                        <td align="center" style="background-color: #4cb96b; 
+                                                height: 50px;"> 
+        
+                                            <a href="#" style="text-decoration: none;"> 
+                                                <p style="color:white; 
+                                                        font-weight:bold;"> 
+                                                    Kitty-Love 🐈💕
+                                                </p> 
+                                            </a> 
+                                        </td> 
+                                    </tr> 
+                                </tbody> 
+                            </table> 
+                        </td> 
+                    </tr> 
+                    <tr style="height: 300px;"> 
+                        <td align="center" style="border: none; 
+                                border-bottom: 2px solid #4cb96b; 
+                                padding-right: 20px;padding-left:20px"> 
+        
+                            <p style="font-weight: bolder;font-size: 42px; 
+                                    letter-spacing: 0.025em; 
+                                    color:black;"> 
+                                Hello ${email}! 
+                                <br> Your otp is ${OTP} 
+                            </p> 
+                        </td> 
+                    </tr> 
+
+                </tbody> 
+            </table> 
+        </body> 
+        `
     }
 
     const otp = new Otp({email: email, otp: OTP});
@@ -62,7 +105,7 @@ module.exports.verifyOtp = async (req, res) => {
     if (!validUser) return res.status(403).json({message: 'Invalid user'});
 
     if(rightOtpFind.email = req.body.email && validUser) {
-        const user = new User(_.pick(req.body, ["email"]));
+        const user = new User(_.pick(req.body, ["email", "password"]));
         const token = user.generateJWT();
         const result =  await user.save();
         const OTPDelete = await Otp.deleteMany({
@@ -79,4 +122,47 @@ module.exports.verifyOtp = async (req, res) => {
             message: "Invalid Otp"
         });
     }
+}
+
+module.exports.signIn = async (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const user = await User.findOne({
+        email,
+        password
+    })
+
+    try {
+        if(user){
+            const token = user.generateJWT();
+    
+            res.status(200).send({
+                success: true,
+                message: "User logged in",
+                user: {
+                    _id: user._id,
+                    name: user.email
+                },
+                token: token
+            });
+        }
+        else{
+            res.send({
+                success: false,
+                message: "Incorrect email or password"
+            });
+        }
+        
+    } catch (error) {
+        res.json({
+            success: false,
+            message: "Some error occured"
+        });
+    }
+
+}
+
+module.exports.updateProfile = async (req, res) => {
+
 }

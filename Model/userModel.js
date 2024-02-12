@@ -5,7 +5,19 @@ const userSchema = Schema({
     email: { 
         type: String,
         required: true
-    }
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    username: String,
+    name: String,
+    gender: Boolean,
+    photo: {
+        data: Buffer,
+        contenType: String
+    },
+    instaid: String
 }, {timestaps: true});
 
 userSchema.methods.generateJWT = function() {

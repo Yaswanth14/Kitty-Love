@@ -1,7 +1,10 @@
-const router = require('express').Router();
-const { signUp, verifyOtp } = require('../Controller/userController');
+const {Router} = require('express');
+const { signUp, verifyOtp, updateProfile, signIn } = require('../Controller/userController');
+const router = Router();
 
-router.route('/signup').post(signUp); // Sign Up Route
-router.route('/signup/verify').post(verifyOtp); // Verify OTP Route
+router.post('/signup', signUp);  // Sign Up Route
+router.post('/signup/verify', verifyOtp); // Verify OTP Route
+router.post('/signin', signIn); // Sign In Route
+// router.put('/update', updateProfile); // Update Profile Route
 
 module.exports = router;
