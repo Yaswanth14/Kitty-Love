@@ -1,11 +1,11 @@
 import React from 'react';
-import './ComponentStyles/Login.css';
+import './ComponentStyles/Signin.css';
 
-const Login= () => {
+const Signin= () => {
     return (
         <div className='wrapper'>
             <form action="">
-                <h1>Login</h1>
+                <h1>Signin</h1>
                 <div className='input-box'>
                     <input type="text" placeholder='Username' required/>
                 </div>
@@ -16,7 +16,7 @@ const Login= () => {
                     <label><input type='checkbox'/>Remember me</label>
                     <a href='#'>Forgot Password?</a>
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit">Signin</button>
                 <div className="register-link">
                     <p>Don't have an account? <a href='="#'>Register</a></p>
                 </div>
@@ -25,4 +25,4 @@ const Login= () => {
     );
 }
 
-export default Login;
+export default Signin;
