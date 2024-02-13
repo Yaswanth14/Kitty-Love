@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import Card from './Components/Card'
-
+import Login from './Components/Login'
 function App() {
   return (
     <div>

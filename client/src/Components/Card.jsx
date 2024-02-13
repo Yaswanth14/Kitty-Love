@@ -1,5 +1,5 @@
 import React from 'react';
-import './Card.css';
+import './ComponentStyles/Card.css';
 
 function Card({username,rollno,description})
 {
