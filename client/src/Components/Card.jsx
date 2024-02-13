@@ -1,9 +1,11 @@
 import React from 'react';
 import './ComponentStyles/Card.css';
+import Layout from './Layout/Layout';
 
 function Card({username,rollno,description})
 {
   return (
+    <Layout>
     <div className='Card'>
       <div className='upper-container'>
         <div className='image-container'>
@@ -17,6 +19,7 @@ function Card({username,rollno,description})
         <button>Add</button>
       </div>
     </div>
+    </Layout>
   );
 }
 

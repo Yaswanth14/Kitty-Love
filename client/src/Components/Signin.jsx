@@ -1,8 +1,10 @@
 import React from 'react';
 import './ComponentStyles/Signin.css';
+import Layout from './Layout/Layout';
 
 const Signin= () => {
     return (
+        <Layout>
         <div className='wrapper'>
             <form action="">
                 <h1>Signin</h1>
@@ -22,6 +24,7 @@ const Signin= () => {
                 </div>
             </form>
         </div>
+        </Layout>
     );
 }
 

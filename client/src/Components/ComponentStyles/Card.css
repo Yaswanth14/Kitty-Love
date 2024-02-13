@@ -1,11 +1,11 @@
 .Card{
     width: 250px;
-    height: 250px;
+    max-height: 250px;
     background: white;
     border-radius: 10px;
     box-shadow: 0px 1px 10px 1px black;
   }
-  
+    
 .upper-container{
     height: 100px;
     background: linear-gradient(to right,rgb(255, 70, 101),rgb(250, 144, 162),rgb(248, 164, 178),rgb(250, 144, 162),rgb(255, 70, 101));
@@ -24,10 +24,11 @@ img{
 }
 .lower-container{
     margin-top: 60px;
-    height: 300px;
+    height: 130px;
     background: white;
     text-align: center;
     font-family: 'Titillium Web', sans-serif;
+    border-bottom: 1px solid black;
 }
 .lower-container h3,h6{
     margin:0;
