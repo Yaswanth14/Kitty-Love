@@ -20,119 +20,136 @@ const transporter = nodemailer.createTransport({
   });
 
 module.exports.signUp = async (req, res) => {
-    const user = await User.findOne({
-        email: req.body.email
-    });
-    if(user) return res.status(400).send({message: "User already exists"});
-    const OTP = otpGenerator.generate(6, {
-        digits: true, lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false
-    });
-    const email = req.body.email;
-    const username = email.split('@')[0].toLowerCase();
-    const emailRegex = /^[a-zA-Z0-9]{10}@gvpce\.ac\.in$/;
-    if (!emailRegex.test(email)) {
-        return res.status(400).json({ message: 'Only domain mails are accepted' });
+    try {
+        const user = await User.findOne({
+            email: req.body.email
+        });
+        if(user) return res.status(400).send({success:false, message: "User already exists"});
+        const OTP = otpGenerator.generate(6, {
+            digits: true, lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false
+        });
+        const email = req.body.email;
+        const username = email.split('@')[0].toLowerCase();
+        const emailRegex = /^[a-zA-Z0-9]{10}@gvpce\.ac\.in$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({success: false, message: 'Only domain mails are accepted' });
+        }
+        console.log(OTP);
+    
+        const mailOptions = {
+            from: process.env.AUTH_EMAIL,
+            to: email,
+            subject: "Verify your email",
+            html: `
+            <body style="background-color:grey"> 
+                <table align="center" border="0" cellpadding="0" cellspacing="0"
+                    width="550" bgcolor="white" style="border:2px solid black"> 
+                    <tbody> 
+                        <tr> 
+                            <td align="center"> 
+                                <table align="center" border="0" cellpadding="0"
+                                    cellspacing="0" class="col-550" width="550"> 
+                                    <tbody> 
+                                        <tr> 
+                                            <td align="center" style="background-color: #4cb96b; 
+                                                    height: 50px;"> 
+            
+                                                <a href="#" style="text-decoration: none;"> 
+                                                    <p style="color:white; 
+                                                            font-weight:bold;"> 
+                                                        Kitty-Love 🐈💕
+                                                    </p> 
+                                                </a> 
+                                            </td> 
+                                        </tr> 
+                                    </tbody> 
+                                </table> 
+                            </td> 
+                        </tr> 
+                        <tr style="height: 300px;"> 
+                            <td align="center" style="border: none; 
+                                    border-bottom: 2px solid #4cb96b; 
+                                    padding-right: 20px;padding-left:20px"> 
+            
+                                <p style="font-weight: bolder;font-size: 20px; 
+                                        letter-spacing: 0.025em; 
+                                        color:black;"> 
+                                    <span style="font-size:30px;">Hello ${username}!</span>
+                                    <br> Your otp is ${OTP} <br>
+                                    This otp is valid only for 5 minutes
+                                </p> 
+                            </td> 
+                        </tr> 
+                    </tbody>
+                </table>
+            </body> 
+            `
+        }
+    
+        const otp = new Otp({email: email, otp: OTP});
+        const salt = await bcrypt.genSalt(10)
+        otp.otp = await bcrypt.hash(otp.otp, salt);
+        const result = await otp.save();
+        await  transporter.sendMail(mailOptions)
+                         .then(()=>{res.status(200).json({success:true, message:"Email has been sent!"})})
+                         .catch((err)=>{console.log("Error in sending Email : "+err)});
+        return;
+    } catch (error) {
+        console.log(error);
+        res.status(400).send({
+            success: false,
+            message: "Server Error"
+        })
     }
-    console.log(OTP);
-
-    const mailOptions = {
-        from: process.env.AUTH_EMAIL,
-        to: email,
-        subject: "Verify your email",
-        html: `
-        <body style="background-color:grey"> 
-            <table align="center" border="0" cellpadding="0" cellspacing="0"
-                width="550" bgcolor="white" style="border:2px solid black"> 
-                <tbody> 
-                    <tr> 
-                        <td align="center"> 
-                            <table align="center" border="0" cellpadding="0"
-                                cellspacing="0" class="col-550" width="550"> 
-                                <tbody> 
-                                    <tr> 
-                                        <td align="center" style="background-color: #4cb96b; 
-                                                height: 50px;"> 
-        
-                                            <a href="#" style="text-decoration: none;"> 
-                                                <p style="color:white; 
-                                                        font-weight:bold;"> 
-                                                    Kitty-Love 🐈💕
-                                                </p> 
-                                            </a> 
-                                        </td> 
-                                    </tr> 
-                                </tbody> 
-                            </table> 
-                        </td> 
-                    </tr> 
-                    <tr style="height: 300px;"> 
-                        <td align="center" style="border: none; 
-                                border-bottom: 2px solid #4cb96b; 
-                                padding-right: 20px;padding-left:20px"> 
-        
-                            <p style="font-weight: bolder;font-size: 42px; 
-                                    letter-spacing: 0.025em; 
-                                    color:black;"> 
-                                Hello ${username}! 
-                                <br> Your otp is ${OTP} 
-                            </p> 
-                            <p>This otp is valid only for 5 minutes</p>
-                        </td> 
-                    </tr> 
-
-                </tbody> 
-            </table> 
-        </body> 
-        `
-    }
-
-    const otp = new Otp({email: email, otp: OTP});
-    const salt = await bcrypt.genSalt(10)
-    otp.otp = await bcrypt.hash(otp.otp, salt);
-    const result = await otp.save();
-    await  transporter.sendMail(mailOptions)
-                     .then(()=>{res.status(200).json({message:"Email has been sent!"})})
-                     .catch((err)=>{console.log("Error in sending Email : "+err)});
-    return;
 }
 
 module.exports.verifyOtp = async (req, res) => {
-    const user = await User.findOne({
-        email: req.body.email
-    });
-    if(user) return res.status(400).send({message: "User already exists"});
-    const otpHolder = await Otp.find({
-        email: req.body.email
-    });
-    if(otpHolder.length === 0) return res.status(404).json({message: 'Otp expired or invalid'});
-    const rightOtpFind = otpHolder[otpHolder.length - 1];
-    const validUser = await bcrypt.compare(req.body.otp, rightOtpFind.otp);
-    if (!validUser) return res.status(403).json({message: 'Invalid user'});
-    const email = req.body.email;
-    const password = await bcrypt.hash(req.body.password, 10);
-    const username = email.split('@')[0].toLowerCase();
+    try {
+        const email = req.body.email.toLowerCase();
+        const user = await User.findOne({
+            email: req.body.email
+        });
+        if(user) return res.status(400).send({success:false, message: "User already exists"});
+        const otpHolder = await Otp.find({
+            email: req.body.email
+        });
+        if(otpHolder.length === 0) return res.status(404).json({message: 'Otp expired or invalid'});
+        const rightOtpFind = otpHolder[otpHolder.length - 1];
+        const validUser = await bcrypt.compare(req.body.otp, rightOtpFind.otp);
+        if (!validUser) return res.status(403).json({message: 'Invalid user'});
+        const password = await bcrypt.hash(req.body.password, 10);
+        const username = email.split('@')[0];
 
-    if(rightOtpFind.email = req.body.email && validUser) {
-        const user = new User({
-            email,
-            password,
-            username
-        });
-        const token = user.generateJWT();
-        const result =  await user.save();
-        const OTPDelete = await Otp.deleteMany({
-            email: rightOtpFind.email
-        });
-        return res.status(200).send({
-            message: "User created successfully",
-            token: token,
-            data: result
-        })
-    }
-    else{
+        if(rightOtpFind.email = req.body.email && validUser) {
+            const user = new User({
+                email,
+                password,
+                username
+            });
+            const token = user.generateJWT();
+            const result =  await user.save();
+            const OTPDelete = await Otp.deleteMany({
+                email: rightOtpFind.email
+            });
+            return res.status(200).send({
+                success: true,
+                message: "User created successfully",
+                token: token,
+                user: result
+            })
+        }
+        else{
+            res.status(400).send({
+                success: false,
+                message: "Invalid Otp"
+            });
+        }
+    } catch (error) {
+        console.log(error);
         res.status(400).send({
-            message: "Invalid Otp"
-        });
+            success: false,
+            message: "Server Error"
+        })
     }
 }
 

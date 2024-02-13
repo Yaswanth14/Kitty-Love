@@ -1,0 +1,56 @@
+/* For signup and signin */
+
+.form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    flex-direction: column;
+    background-color: rgb(118, 186, 223);
+    background-image: linear-gradient(0deg, #f99cd4 0%, #9af4f1 100%);
+    min-height: 84vh;
+}
+
+.form-container form{
+    box-shadow: rgb(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 20px;
+    background-color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.form-container form label{
+    font-size: 18px;
+}
+
+.form-container form .title{
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-family: 'Playfair Display', serif;
+}
+
+.form-container form input{
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0;
+}
+
+.form-container form button{
+    border: 1px solid black;
+    border-radius: 0;
+    background-color: #000;
+    color: white;
+    width: 250px;
+}
+
+.form-container form button:hover{
+    border: 1px solid black;
+    background: black;
+    color: #f99cd4;
+}
+
+#otp-button{
+    width: 50px;
+    background-color: grey;
+    margin-left: 10px;
+}
