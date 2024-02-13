@@ -1,0 +1,71 @@
+/* KittyLoveStyles.css */
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
+/* Body */
+body {
+    font-family: 'Roboto', sans-serif;
+    /* background-color: #91c0f0; */
+    background-color: rgb(118, 186, 223);
+    background-image: linear-gradient(0deg, #fcafdd 0%, #9af4f1 100%);
+    color: #333;
+}
+
+/* Header */
+h1, .h1 {
+    font-family: 'Shadows Into Light', cursive;
+    color: #f14d4d;
+    margin-bottom: 30px;
+    font-weight: bolder;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #ff6b6b;
+    border-color: #ff6b6b;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #ff4d4d;
+    border-color: #ff4d4d;
+}
+
+/* Text */
+.lead {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Form */
+.form-control {
+    border-color: #ff6b6b;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 107, 0.25);
+}
+
+/* Additional Styling */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.row {
+    margin-bottom: 30px;
+}
+
+.h4{
+    background-color: #ffeded;
+    border: 2px solid #ff6b6b;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
