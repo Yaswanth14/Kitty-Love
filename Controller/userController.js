@@ -29,6 +29,7 @@ module.exports.signUp = async (req, res) => {
         digits: true, lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false
     });
     const email = req.body.email;
+    const username = email.split('@')[0].toLowerCase();
     const emailRegex = /^[a-zA-Z0-9]{10}@gvpce\.ac\.in$/;
     if (!emailRegex.test(email)) {
         return res.status(400).json({ message: 'Only domain mails are accepted' });
@@ -73,9 +74,10 @@ module.exports.signUp = async (req, res) => {
                             <p style="font-weight: bolder;font-size: 42px; 
                                     letter-spacing: 0.025em; 
                                     color:black;"> 
-                                Hello ${email}! 
+                                Hello ${username}! 
                                 <br> Your otp is ${OTP} 
                             </p> 
+                            <p>This otp is valid only for 5 minutes</p>
                         </td> 
                     </tr> 
 
@@ -107,9 +109,16 @@ module.exports.verifyOtp = async (req, res) => {
     const rightOtpFind = otpHolder[otpHolder.length - 1];
     const validUser = await bcrypt.compare(req.body.otp, rightOtpFind.otp);
     if (!validUser) return res.status(403).json({message: 'Invalid user'});
+    const email = req.body.email;
+    const password = await bcrypt.hash(req.body.password, 10);
+    const username = email.split('@')[0].toLowerCase();
 
     if(rightOtpFind.email = req.body.email && validUser) {
-        const user = new User(_.pick(req.body, ["email", "password"]));
+        const user = new User({
+            email,
+            password,
+            username
+        });
         const token = user.generateJWT();
         const result =  await user.save();
         const OTPDelete = await Otp.deleteMany({
@@ -129,16 +138,15 @@ module.exports.verifyOtp = async (req, res) => {
 }
 
 module.exports.signIn = async (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
 
     const user = await User.findOne({
-        email,
-        password
+        email: req.body.email
     })
+    const hashedPassword = user.password;
+    const isValid = bcrypt.compare(req.body.password, hashedPassword);
 
     try {
-        if(user){
+        if(user && isValid){
             const token = user.generateJWT();
     
             res.status(200).send({
@@ -146,7 +154,7 @@ module.exports.signIn = async (req, res) => {
                 message: "User logged in",
                 user: {
                     _id: user._id,
-                    name: user.email
+                    username: user.username
                 },
                 token: token
             });
@@ -164,9 +172,5 @@ module.exports.signIn = async (req, res) => {
             message: "Some error occured"
         });
     }
-
-}
-
-module.exports.updateProfile = async (req, res) => {
 
 }

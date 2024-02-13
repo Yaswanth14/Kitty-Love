@@ -15,10 +15,10 @@ const userSchema = Schema({
     gender: Boolean,
     photo: {
         data: Buffer,
-        contenType: String
+        contentType: String
     },
-    instaid: String
-}, {timestaps: true});
+    instaid: String 
+}, {timestamps: true});
 
 userSchema.methods.generateJWT = function() {
     const token = jwt.sign({
