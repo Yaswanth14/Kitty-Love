@@ -5,10 +5,10 @@ dotenv.config();
 function userMiddleware(req, res, next) {
     const jwtToken = req.headers.authorization;
     try {
-        const decodedValue = jwt.verify(jwtToken, process.env.JWT_SECRET);
+        const decodedValue = jwt.verify(jwtToken, process.env.JWT_SECRET_KEY);
 
-        if (decodedValue.username) {    
-            req.username = decodedValue.username;
+        if (decodedValue.email) {    
+            req.email = decodedValue.email;
             next();
         } else {
             res.json({

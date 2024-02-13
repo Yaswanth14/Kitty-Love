@@ -170,7 +170,7 @@ module.exports.signIn = async (req, res) => {
                 message: "User logged in",
                 user: {
                     _id: user._id,
-                    username: user.username
+                    email: user.email
                 },
                 token: token
             });
