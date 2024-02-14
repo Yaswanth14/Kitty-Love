@@ -48,6 +48,11 @@ h1, .h1 {
     box-shadow: 0 0 0 0.2rem rgba(255, 107, 107, 0.25);
 }
 
+.form-control[readonly] {
+    cursor: default;
+    background-color: rgb(231, 227, 227);
+}
+
 /* Additional Styling */
 .container {
     max-width: 800px;

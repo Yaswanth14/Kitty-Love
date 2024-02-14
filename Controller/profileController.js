@@ -7,11 +7,11 @@ module.exports.updateProfile = async (req, res) => {
         const {photo} = req.files;
         switch (true) {
             case !name:
-                return res.status(500).send({error: "Name is required"});
+                return res.status(500).send({success:false,message: "Name is required"});
             case !gender:
-                return res.status(500).send({error: "Gender is required"});
+                return res.status(500).send({success:false,message: "Gender is required"});
             case photo && photo.size > 1000000:
-                return res.status(500).send({error: "Photo size should be less than 1MB"});
+                return res.status(500).send({success:false,message: "Photo size should be less than 1MB"});
         }
         const user = await  User.findByIdAndUpdate(req.params.pid, 
             {...req.fields}, {new: true}

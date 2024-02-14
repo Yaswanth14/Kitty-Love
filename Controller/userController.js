@@ -57,7 +57,7 @@ module.exports.signUp = async (req, res) => {
                                                 <a href="#" style="text-decoration: none;"> 
                                                     <p style="color:white; 
                                                             font-weight:bold;"> 
-                                                        Kitty-Love 🐈💕
+                                                        Kitty-Love💕
                                                     </p> 
                                                 </a> 
                                             </td> 
@@ -75,7 +75,7 @@ module.exports.signUp = async (req, res) => {
                                         letter-spacing: 0.025em; 
                                         color:black;"> 
                                     <span style="font-size:30px;">Hello ${username}!</span>
-                                    <br> Your otp is ${OTP} <br>
+                                    <br> Your otp is <span style="color:red">${OTP}</span> <br>
                                     This otp is valid only for 5 minutes
                                 </p> 
                             </td> 
@@ -124,7 +124,8 @@ module.exports.verifyOtp = async (req, res) => {
             const user = new User({
                 email,
                 password,
-                username
+                username,
+                hasphoto: false
             });
             const token = user.generateJWT();
             const result =  await user.save();
@@ -155,13 +156,13 @@ module.exports.verifyOtp = async (req, res) => {
 
 module.exports.signIn = async (req, res) => {
 
-    const user = await User.findOne({
-        email: req.body.email
-    })
-    const hashedPassword = user.password;
-    const isValid = bcrypt.compare(req.body.password, hashedPassword);
-
     try {
+        const user = await User.findOne({
+            email: req.body.email
+        })
+        const hashedPassword = await user.password;
+        const isValid = await bcrypt.compare(req.body.password, hashedPassword);
+
         if(user && isValid){
             const token = user.generateJWT();
     
@@ -170,7 +171,8 @@ module.exports.signIn = async (req, res) => {
                 message: "User logged in",
                 user: {
                     _id: user._id,
-                    email: user.email
+                    email: user.email,
+                    username: user.username,
                 },
                 token: token
             });

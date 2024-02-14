@@ -12,12 +12,16 @@ const userSchema = Schema({
     },
     username: String,
     name: String,
-    gender: Boolean,
+    bio: String,
+    gender: String,
     photo: {
         data: Buffer,
         contentType: String
     },
-    instaid: String 
+    hasphoto: {
+        type: Boolean,
+        default: false
+    }
 }, {timestamps: true});
 
 userSchema.methods.generateJWT = function() {

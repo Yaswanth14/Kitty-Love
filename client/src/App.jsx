@@ -19,7 +19,7 @@ function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/profiles' element={<PrivateRoute />}>
           <Route path='' element={<Profiles />} />
-          <Route path='myprofile' element={<MyProfile />} />
+          <Route path='myprofile/:username' element={<MyProfile />} />
           <Route path='crushlist' element={<CrushList />} />
         </Route>
         <Route path='/signup' element={<Signup />} />

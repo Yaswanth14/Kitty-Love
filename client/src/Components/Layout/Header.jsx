@@ -42,10 +42,10 @@ const Header = () => {
                 <NavLink to='/profiles' className="nav-link">Profiles</NavLink>
               </div>
               <div className="nav-item">
-                <NavLink to='profiles/crushlist' className="nav-link">Crush list</NavLink>
+                <NavLink to='/profiles/crushlist' className="nav-link">Crush list</NavLink>
               </div>
               <div className="nav-item">
-                <NavLink to='profiles/myprofile' className="nav-link">Profile</NavLink>
+                <NavLink to={`/profiles/myprofile/${auth?.user?.username}`} className="nav-link">Profile</NavLink>
               </div>
               <li className="nav-item">
                 <NavLink onClick={handleSignout} to='/signin' className="nav-link">Logout</NavLink>

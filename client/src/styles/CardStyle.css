@@ -1,0 +1,72 @@
+.card-img-top {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ff69b4;
+}
+
+.card {
+  padding: 0.5em;
+  text-align: center;
+  border-radius: 1em; /* Reduced border-radius for a smoother look */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Reduced box-shadow */
+}
+
+.card-title {
+  font-size: 1.25em; /* Adjusted font-size */
+  font-weight: bold;
+  color: #4b4b4b;
+}
+
+.username {
+  font-size: 0.9em; /* Adjusted font-size */
+  color: #666; /* Dimmed color */
+  margin-bottom: 0.5px;
+}
+
+.btn-primary {
+  border-radius: 1em; /* Reduced border-radius */
+  padding: 0.5em 1em; /* Adjusted padding */
+  background-color: #ff3366;
+  border-color: #ff3366;
+}
+
+.btn-primary:hover {
+  background-color: #ff1a4d;
+  border-color: #ff1a4d;
+}
+
+.user-link {
+  text-decoration: none;
+  color: inherit; /* Ensure link color is inherited */
+}
+
+@media (max-width: 576px) {
+  .card {
+    padding: 0.5em; /* Adjusted padding */
+    border-radius: 0.5em; /* Adjusted border-radius */
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .card-img-top {
+    width: 80px; /* Reduced width */
+    height: 80px; /* Reduced height */
+    border-radius: 50%;
+  }
+
+  .card-title {
+    font-size: 1em; /* Adjusted font-size */
+  }
+
+  .username {
+    font-size: 0.8em; /* Adjusted font-size */
+  }
+
+  .btn-primary {
+    padding: 0.4em 0.8em; /* Adjusted padding */
+  }
+}
+

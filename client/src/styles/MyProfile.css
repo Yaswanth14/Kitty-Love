@@ -1,0 +1,15 @@
+.profile-img {
+    max-height: 200px; /* Default size */
+}
+
+@media (max-width: 768px) {
+    .profile-img {
+        max-height: 100px; /* Adjust size for medium screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .profile-img {
+        max-height: 80px; /* Adjust size for small screens */
+    }
+}

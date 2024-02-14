@@ -40,14 +40,20 @@ const Signup = () => {
                     user: res.data.user,
                     token: res.data.token
                 })
-                localStorage.setItem('auth', JSON.stringify(res.data));
-                navigate('/');
+                localStorage.setItem('auth', JSON.stringify(res.data))
+                setTimeout(() => {
+                    navigate(`/profiles/myprofile/${auth?.user?.username}`)
+                }, 1000);
             } else{
                 toast.error(res.data.message);
             }
         } catch (error) {
-            console.log(error);
-            toast.error('Error signing up!');
+            console.log(error.response.data.message);
+            if (error.response && error.response.data) {
+              toast.error(error.response.data.message);
+            } else {
+              toast.error("Something went wrong");
+            }
         }
     }
     

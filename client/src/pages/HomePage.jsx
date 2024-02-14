@@ -8,7 +8,7 @@ const HomePage = () => {
     <Layout>
         <div className="container">
                 <h1 className="text-center my-5">Kitty Love</h1>
-                <p className="lead text-center">This Valentine's Day, we will help you express your kitty love.</p>
+                <p className="lead text-center">Valentine's Day is over 🙁 but you still have a chance to confess, we will help you express your kitty love.</p>
                 <div className="row justify-content-center mt-5">
                     <div className="col-md-6 text-center">
                         <p className="h4">Login using domain mail id</p>
