@@ -4,11 +4,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 70vh;
     flex-direction: column;
     background-color: rgb(118, 186, 223);
     background-image: linear-gradient(0deg, #f99cd4 0%, #9af4f1 100%);
     min-height: 84vh;
+    min-width: 80vh;
 }
 
 .form-container form{
@@ -36,21 +36,20 @@
 }
 
 .form-container form button{
-    border: 1px solid black;
+    border: 1px solid #ff3366;
     border-radius: 0;
-    background-color: #000;
-    color: white;
+    background-color: #ff3366;
     width: 250px;
 }
 
 .form-container form button:hover{
-    border: 1px solid black;
-    background: black;
-    color: #f99cd4;
+    border: 1px solid #ff1a4d;
+    background-color: #ff1a4d;
 }
 
 #otp-button{
     width: 50px;
-    background-color: grey;
+    background-color: #f99cd4;
     margin-left: 10px;
+    color: black;
 }

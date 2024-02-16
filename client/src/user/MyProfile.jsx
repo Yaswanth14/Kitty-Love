@@ -54,7 +54,7 @@ const MyProfile = () => {
       if (data?.success) {
         toast.error(data?.message);
         } else {
-          navigate("/profiles");
+          navigate("/profiles/all");
         }
       } catch (error) {
         console.log(error.response.data.message);
@@ -69,11 +69,11 @@ const MyProfile = () => {
   return (
     <Layout>
         <div className="container">
-            <h1 className="text-center my-5">Update User Profile</h1>
+            <h1 className="text-center my-5 title">Update User Profile</h1>
             <div className="title-card">
                 <form onSubmit={handleUpdate}>
                     <div className="mb-3 text-center">
-                        <label className="btn btn-outline-secondary col-md-5">Upload Photo 1mb
+                        <label className="btn btn-outline-secondary col-md-4">Upload Photo 1mb
                             <input
                                 type="file"
                                 name="photo"
@@ -114,7 +114,7 @@ const MyProfile = () => {
                       )}
                     <div className="row mb-3">
                         <div className="col-md-6">
-                            <label className="form-label">Username</label>
+                            <label className="form-label side-heading">Username</label>
                             <input
                                 type="text"
                                 value={username}
@@ -124,30 +124,31 @@ const MyProfile = () => {
                             />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Gender</label>
+                            <label className="form-label side-heading">Gender</label>
                             <select
-                                className="form-select"
+                                className="form-select form-control"
                                 value={gender}
                                 onChange={(e) => setGender(e.target.value)}
                             >
-                                <option value={gender}>{gender}</option>
+                                <option value={gender?gender:"Gender"}>{gender}</option>
                                 <option value="female">Female</option>
                                 <option value="male">Male</option>
                             </select>
                         </div>
                     </div>
                     <div className="mb-3">
-                        <label className="form-label">Name</label>
+                        <label className="form-label side-heading">Name</label>
                         <input
                             type="text"
                             value={name}
+                            maxLength={25}
                             placeholder="Enter your name"
                             className="form-control"
                             onChange={(e) => setName(e.target.value)}
                         />
                     </div>
                     <div className="mb-3">
-                        <label className="form-label">Email</label>
+                        <label className="form-label side-heading">Email</label>
                         <input
                             type="text"
                             value={email}
@@ -157,11 +158,12 @@ const MyProfile = () => {
                         />
                     </div>
                     <div className="mb-3">
-                        <label className="form-label">Bio</label>
+                        <label className="form-label side-heading">Bio</label>
                         <input
                             type="text"
                             value={bio}
-                            placeholder="Enter your bio"
+                            maxLength={50}
+                            placeholder="Enter a short bio"
                             className="form-control"
                             onChange={(e) => setBio(e.target.value)}
                         />

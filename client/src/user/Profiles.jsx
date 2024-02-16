@@ -30,7 +30,7 @@ const Profiles = () => {
         <div className='container'>
     <div className='row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4'>
             {profiles?.map((user) => (
-                <Link className='user-link col' to={`/profiles/${user.username}`} key={user._id}>
+                <Link className='user-link col' to={`/profile/${user.username}`} key={user._id}>
                     <div className="card">
                     <p className='card-text username'>{user.username}, {user.gender}</p>
                         <img 
@@ -39,7 +39,7 @@ const Profiles = () => {
                         <div className="card-body">
                             <h5 className="card-title">{user.name}</h5>
                             <p className="card-text">{user.bio}</p>
-                            <a href="#" className="btn btn-primary">Crushhhh</a>
+                            <button href="#" className="btn btn-primary">Crushhhh</button>
                         </div>
                     </div>
                 </Link>

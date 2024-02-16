@@ -21,6 +21,18 @@ const userSchema = Schema({
     hasphoto: {
         type: Boolean,
         default: false
+    },
+    crushcount: {
+        type: Number,
+        default: 0
+    },
+    crushlist: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    dms: {
+        type: [String],
+        default: ["Hello from team Kitty Love 💕", "Here I am sliding right into your dms 🦦"]
     }
 }, {timestamps: true});
 

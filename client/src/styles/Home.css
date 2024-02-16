@@ -55,10 +55,9 @@ h1, .h1 {
 
 /* Additional Styling */
 .container {
-    max-width: 800px;
+    max-width: 70%;
     margin: 0 auto;
     padding: 20px;
-    text-align: center;
 }
 
 .row {

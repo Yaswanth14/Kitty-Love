@@ -1,6 +1,7 @@
-const {Router} = require('express');
+const { Router } = require('express');
 const { signUp, verifyOtp, signIn } = require('../Controller/userController');
 const { updateProfile, getProfiles, getSingleProfile, getProfilePhoto } = require('../Controller/profileController');
+const { sendDm, addToCrush, deleteDms, removeFromCrush } = require('../Controller/crushController');
 const router = Router();
 const formidable = require('express-formidable')
 const userMiddleware = require("../middleware/authMiddleware")
@@ -13,6 +14,11 @@ router.put('/update/:pid', userMiddleware, formidable(), updateProfile); // Upda
 router.get('/profiles', userMiddleware, getProfiles); // Get all profiles route
 router.get('/profiles/:username', getSingleProfile); // Get profile of a single user
 router.get('/profile-photo/:pid', getProfilePhoto); // Get the photo of a specific user
+
+router.post('/message/:username', userMiddleware, sendDm); //  Send DM to user
+router.put('/like/:username', userMiddleware, addToCrush); // Add to crush list
+router.put( '/unlike/:pid', userMiddleware ,removeFromCrush) ;// Remove from Crush
+router.put('/delete/dms/:pid', deleteDms); // Delete DMS
 
 router.get('/user-auth', userMiddleware, (req, res) => {
     res.status(200).send({

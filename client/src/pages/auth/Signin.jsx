@@ -26,7 +26,7 @@ const Signin = () => {
               token: res.data.token
             })
             localStorage.setItem('auth', JSON.stringify(res.data));
-            navigate('/profiles');
+            navigate('/profiles/all');
         } else{
             toast.error(res.data.message);
         }

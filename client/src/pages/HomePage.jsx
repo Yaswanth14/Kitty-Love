@@ -12,24 +12,25 @@ const HomePage = () => {
                 <div className="row justify-content-center mt-5">
                     <div className="col-md-6 text-center">
                         <p className="h4">Login using domain mail id</p>
+                        <p>This is to maintain the integrity.<br/> Eg: 21212kitty@gvpce.ac.in</p>
                     </div>
                 </div>
                 <div className="row justify-content-center mt-5">
                     <div className="col-md-6 text-center">
-                        <p className="h4">Select your crushes</p>
-                        <p>You can select upto a maximum of 3 crushes</p>
+                        <p className="h4">Select your crush and send anonymous messages</p>
+                        <p>You can send messages to any number of users and add upto 3 users to your crush list</p>
                     </div>
                 </div>
                 <div className="row justify-content-center mt-5">
                     <div className="col-md-6 text-center">
                         <p className="h4">Keep track of your crushes</p>
-                        <p>The other person can send you a message in a secured and anonymous way</p>
+                        <p>You can know the number of people having crush on you but not who they are</p>
                     </div>
                 </div>
                 <div className="row justify-content-center mt-5">
                     <div className="col-md-6 text-center">
                         <p className="h4">Connect with your kitty love</p>
-                        <p>If there is a mutual crush, you'll be notified 😃</p>
+                        <p>If there is a mutual crush, you'll be notified through email 😃</p>
                     </div>
                 </div>
                 <div className="row justify-content-center mt-5">
