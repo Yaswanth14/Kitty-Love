@@ -38,18 +38,34 @@ module.exports.updateProfile = async (req, res) => {
 //get all profiles
 module.exports.getProfiles = async (req, res) => {
     try {
-        const users = await User.find({}).select("-photo -dms").limit(12).sort({createdAt:-1});
-        res.status(200).send({
-            success: true,
-            length: users.length,
-            message: "Users  fetched successfully.",
-            users 
-        });
+      // Extract page number from query parameters, default to 1 if not provided
+      const page = req.query.page ? parseInt(req.query.page) : 1;
+      const limit = 9; // Number of profiles per page
+      const skip = (page - 1) * limit;
+  
+      // Fetch profiles based on pagination
+      const users = await User.find({})
+        .select("-photo -dms -crushlist") // Exclude photo and dms fields
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit);
+  
+      // Check if there are more profiles
+      const totalUsers = await User.countDocuments({});
+      const hasMore = totalUsers > page * limit;
+  
+      // Send response with profiles and pagination info
+      res.status(200).json({
+        success: true,
+        message: "Profiles fetched successfully.",
+        users,
+        hasMore
+      });
     } catch (error) {
-        console.log(error);
-        res.status(500).send({success:false, message: "Error in getting profiles"});
-    }
-}
+        console.error("Error fetching profiles:", error);
+        res.status(500).json({ success: false, message: "Error in getting profiles" });
+      }
+};
 
 //get a single profile
 module.exports.getSingleProfile = async (req, res) => {
