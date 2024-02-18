@@ -129,6 +129,7 @@ const MyProfile = () => {
                                 className="form-select form-control"
                                 value={gender}
                                 onChange={(e) => setGender(e.target.value)}
+                                required
                             >
                                 <option value={gender?gender:"Gender"}>{gender}</option>
                                 <option value="female">Female</option>
@@ -136,26 +137,29 @@ const MyProfile = () => {
                             </select>
                         </div>
                     </div>
-                    <div className="mb-3">
-                        <label className="form-label side-heading">Name</label>
-                        <input
-                            type="text"
-                            value={name}
-                            maxLength={25}
-                            placeholder="Enter your name"
-                            className="form-control"
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label side-heading">Email</label>
-                        <input
-                            type="text"
-                            value={email}
-                            placeholder="Enter your email"
-                            className="form-control"
-                            readOnly
-                        />
+                    <div className="row mb-3">
+                        <div className="col-md-6">
+                          <label className="form-label side-heading">Name</label>
+                          <input
+                              type="text"
+                              value={name}
+                              maxLength={25}
+                              placeholder="Enter your name"
+                              className="form-control"
+                              onChange={(e) => setName(e.target.value)}
+                              required
+                          />
+                        </div>
+                        <div className="col-md-6">
+                          <label className="form-label side-heading">Email</label>
+                          <input
+                              type="text"
+                              value={email}
+                              placeholder="Enter your email"
+                              className="form-control"
+                              readOnly
+                          />
+                        </div>
                     </div>
                     <div className="mb-3">
                         <label className="form-label side-heading">Bio</label>

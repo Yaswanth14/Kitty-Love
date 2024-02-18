@@ -38,7 +38,7 @@ module.exports.updateProfile = async (req, res) => {
 //get all profiles
 module.exports.getProfiles = async (req, res) => {
     try {
-        const users = await User.find({}).select("-photo").limit(12).sort({createdAt:-1});
+        const users = await User.find({}).select("-photo -dms").limit(12).sort({createdAt:-1});
         res.status(200).send({
             success: true,
             length: users.length,

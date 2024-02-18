@@ -41,9 +41,7 @@ const Signup = () => {
                     token: res.data.token
                 })
                 localStorage.setItem('auth', JSON.stringify(res.data))
-                setTimeout(() => {
-                    navigate(`/profiles/myprofile/${auth?.user?.username}`)
-                }, 1000);
+                navigate(`/profiles/myprofile/${res?.data?.user.username}`);
             } else{
                 toast.error(res.data.message);
             }

@@ -15,6 +15,7 @@ const UserProfile = () => {
     const [dms, setDms] = useState([]);
     const [newDm, setNewDm] = useState('');
     const [id, setId] = useState('');
+    const [isPrivate, setIsPrivate] = useState(false);
 
     useEffect(() => {
         const getSingleUser = async () => {
@@ -27,6 +28,7 @@ const UserProfile = () => {
                 setCrushCount(data.user.crushcount);
                 setId(data.user._id);
                 setDms(data.user.dms || []);
+                setIsPrivate(data.user.isPrivate);
             } catch (error) {
                 console.log(error);
             }
@@ -98,11 +100,15 @@ const UserProfile = () => {
                                 <button className="btn btn-primary mb-2" onClick={handleAddDm}>Send</button>
                             </div>
                             <div className="dms-list">
-                                <ul className="list-group">
+                                {isPrivate ? (
+                                    <p>Message recieved to this profile are private</p>
+                                ) : (
+                                    <ul className="list-group">
                                     {dms.slice().reverse().map((dm, index) => (
                                         <li key={index} className="list-group-item">{dm}</li>
                                     ))}
-                                </ul>
+                                    </ul>
+                                )}
                             </div>
                         </div>
                     </div>

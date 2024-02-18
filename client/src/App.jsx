@@ -7,7 +7,7 @@ import Signin from './pages/auth/Signin';
 import PageNotFound from './pages/PageNotFound';
 import PrivateRoute from './components/Routes/Private';
 import Profiles from './user/Profiles';
-import CrushList from './user/CrushList';
+import Dashboard from './user/Dashboard';
 import MyProfile from './user/MyProfile';
 import UserProfile from './user/UserProfile';
 
@@ -21,7 +21,7 @@ function App() {
         <Route path='/profiles' element={<PrivateRoute />}>
           <Route path='all' element={<Profiles />} />
           <Route path='myprofile/:username' element={<MyProfile />} />
-          <Route path='crushlist' element={<CrushList />} />
+          <Route path='dashboard' element={<Dashboard />} />
         </Route>
         <Route path='profile/:username' element={<UserProfile/>}/>
         <Route path='/signup' element={<Signup />} />

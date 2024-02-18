@@ -33,6 +33,10 @@ const userSchema = Schema({
     dms: {
         type: [String],
         default: ["Hello from team Kitty Love 💕", "Here I am sliding right into your dms 🦦"]
+    },
+    isPrivate: {
+        type: Boolean,
+        default: false
     }
 }, {timestamps: true});
 

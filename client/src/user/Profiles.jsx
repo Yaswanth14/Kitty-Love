@@ -39,7 +39,7 @@ const Profiles = () => {
                         <div className="card-body">
                             <h5 className="card-title">{user.name}</h5>
                             <p className="card-text">{user.bio}</p>
-                            <button href="#" className="btn btn-primary">Crushhhh</button>
+                            <button href="#" className="btn btn-primary">{user.gender?user.gender:"unknown"}</button>
                         </div>
                     </div>
                 </Link>

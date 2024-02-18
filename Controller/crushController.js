@@ -111,3 +111,39 @@ module.exports.deleteDms = async (req,res)=>{
         })
     }
 }
+
+module.exports.getCrushDetails = async (req, res) => {
+    try {
+        const user = await User.findOne({ _id: req.params.pid }).select('name username gender');
+        if(!user) return res.status(400).json({success:false, message: "User not found"});
+        res.status(200).send(user);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({success:false, message: "Error while getting single profile"});
+    }
+}
+
+module.exports.getDms = async (req, res) => {
+    try {
+        const user = await User.findOne({_id: req.params.pid}).select('dms isPrivate');
+        if(!user) return res.status(400).json({success:false, message: "User not found"});
+        res.status(200).send(user);    
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({success:false, message: "Error while getting dms"});    
+    }
+}
+
+module.exports.updatePrivate = async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      const { isPrivate } = req.body;
+  
+      await User.findByIdAndUpdate(userId, { isPrivate }, { new: true });
+  
+      res.status(200).json({ success: true, message: "isPrivate updated successfully" });
+    } catch (error) {
+      console.error("Error updating isPrivate:", error);
+      res.status(500).json({ success: false, message: "Failed to update isPrivate" });
+    }
+}
