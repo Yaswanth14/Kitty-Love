@@ -8,50 +8,29 @@ import "../styles/CardStyle.css";
 const Profiles = () => {
   const [profiles, setProfiles] = useState([]);
   const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const [fetchedIds, setFetchedIds] = useState([]);
-  const loader = useRef(null);
+  const [hasMore, setHasMore] = useState(false);
+
+  useEffect(() => {
+    fetchProfiles();
+  }, [page]);
 
   // Fetch profiles
   const fetchProfiles = async () => {
     try {
       const { data } = await axios.get(`${import.meta.env.VITE_API}/user/profiles?page=${page}`);
-      const newProfiles = data.users.filter(profile => !fetchedIds.includes(profile._id));
-      if (newProfiles.length === 0) {
-        setHasMore(false);
-      } else {
-        setProfiles(prevProfiles => [...prevProfiles, ...newProfiles]);
-        setPage(prevPage => prevPage + 1);
-        setFetchedIds(prevIds => [...prevIds, ...newProfiles.map(profile => profile._id)]);
-      }
+      const {users, hasMore} = data;
+      setProfiles(prevProfiles => prevProfiles ? [...prevProfiles, ...users] : users);
+      setHasMore(hasMore);
     } catch (error) {
       console.error("Error fetching profiles:", error);
       toast.error('Something went wrong!');
     }
   };
 
-  // Intersection observer to trigger fetchProfiles when loader is visible
-  useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && hasMore) {
-        fetchProfiles();
-      }
-    }, { threshold: 1 });
+  const loadMoreProfiles = () => {
+    setPage(page + 1);
+  };
 
-    if (loader.current) {
-      observer.observe(loader.current);
-    }
-
-    return () => {
-      if (loader.current) {
-        observer.unobserve(loader.current);
-      }
-    };
-  }, [hasMore]);
-
-  useEffect(() => {
-    fetchProfiles();
-  }, []);
 
   return (
     <Layout>
@@ -73,7 +52,7 @@ const Profiles = () => {
             </Link>
           ))}
         </div>
-        {hasMore && <div ref={loader}></div>}
+        {hasMore && <button onClick={loadMoreProfiles}>Load More</button>}
       </div>
     </Layout>
   );

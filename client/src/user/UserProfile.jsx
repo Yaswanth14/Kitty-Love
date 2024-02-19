@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './../components/Layout/Layout';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import '../styles/MyProfile.css'
+import '../styles/MyProfile.css';
 
 const UserProfile = () => {
     const params = useParams();
+    const navigate = useNavigate();
     const [name, setName] = useState('');
     const [bio, setBio] = useState('');
     const [username, setUsername] = useState('');
@@ -45,13 +46,24 @@ const UserProfile = () => {
             }
             const {data} = await axios.post(`${import.meta.env.VITE_API}/user/message/${username}`, {
                 dm: newDm
-            })
+            });
             setDms([...dms, newDm]);
             setNewDm('');
             toast.success(data.message);
         } catch (error) {
             console.log(error);
             toast.error(error.data.message);
+        }
+    };
+
+    const handleAddToCrushList = async () => {
+        try {
+            await axios.put(`${import.meta.env.VITE_API}/user/like/${username}`);
+            setCrushCount(crushcount + 1); // Assuming crushcount is incremented on successful addition
+            toast.success('Added to crush list!');
+            navigate('/profiles/dashboard');
+        } catch (error) {
+            toast.error(error.response.data.message);
         }
     };
 
@@ -83,6 +95,7 @@ const UserProfile = () => {
                                         />
                                     </div>
                                 </div>
+                                <button className="btn btn-primary" onClick={handleAddToCrushList}>Add to Crush List</button>
                         </div>
                     </div>
                     <div className="col-lg-6">
@@ -101,7 +114,7 @@ const UserProfile = () => {
                             </div>
                             <div className="dms-list">
                                 {isPrivate ? (
-                                    <p>Message recieved to this profile are private</p>
+                                    <p>Message received to this profile are private</p>
                                 ) : (
                                     <ul className="list-group">
                                     {dms.slice().reverse().map((dm, index) => (
@@ -116,7 +129,6 @@ const UserProfile = () => {
             </div>
         </Layout>
     );
-    
 };
 
 export default UserProfile;

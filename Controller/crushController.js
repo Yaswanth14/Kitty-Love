@@ -42,7 +42,16 @@ module.exports.addToCrush = async (req, res) => {
         
         await User.updateOne(
             { email: req.email },
-            { $push: { crushlist: pid } }
+            { 
+                $push: { crushlist: pid }
+            }
+        );
+
+        await User.updateOne(
+            {_id: pid},
+            {
+                $inc: { crushcount: 1 }
+            }
         );
 
         res.status(200).send({
@@ -65,8 +74,17 @@ module.exports.removeFromCrush = async (req, res) => {
         // Update the crushlist by removing the specified pid
         const updatedUser = await User.findOneAndUpdate(
             { email: req.email },
-            { $pull: { crushlist: pid } },
+            { 
+                $pull: { crushlist: pid }
+            },
             { new: true }
+        );
+
+        await User.updateOne(
+            {_id: pid},
+            {
+                $inc: { crushcount: -1 }
+            }
         );
 
         // Check if the user was found and the crushlist was updated
@@ -125,7 +143,7 @@ module.exports.getCrushDetails = async (req, res) => {
 
 module.exports.getDms = async (req, res) => {
     try {
-        const user = await User.findOne({_id: req.params.pid}).select('dms isPrivate');
+        const user = await User.findOne({_id: req.params.pid}).select('dms isPrivate crushlist');
         if(!user) return res.status(400).json({success:false, message: "User not found"});
         res.status(200).send(user);    
     } catch (error) {
