@@ -1,4 +1,5 @@
 const {User} = require('../Model/userModel');
+const Sendmail = require('./mailController');
 
 module.exports.sendDm = async(req, res) => {
     try {
@@ -24,6 +25,25 @@ module.exports.sendDm = async(req, res) => {
         })
     }
 }
+
+const checkIfInCrushList = async (pid, userId) => {
+    try {
+      // Retrieve the user with the provided pid
+      const user = await User.findById(pid);
+      if (!user) {
+        // Handle case where user with provided pid is not found
+        return false;
+      }
+  
+      // Check if the user's crushlist contains the userId
+      const isInCrushList = user.crushlist.includes(userId);
+  
+      return isInCrushList;
+    } catch (error) {
+      console.error('Error checking crushlist:', error);
+      return false; // Return false in case of any error
+    }
+  };
 
 module.exports.addToCrush = async (req, res) => {
     try {
@@ -53,6 +73,13 @@ module.exports.addToCrush = async (req, res) => {
                 $inc: { crushcount: 1 }
             }
         );
+
+        // Check if the user with pid also has req._id in their crushlist
+        const isInCrushList = await checkIfInCrushList(pid, req._id);
+        if(isInCrushList)
+        {
+            Sendmail(pid, req._id);
+        }
 
         res.status(200).send({
             success: true,
