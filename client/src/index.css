@@ -75,3 +75,19 @@ font-family: 'Poppins', sans-serif; */
     height: 70vh;
     flex-direction: column;
 }
+
+
+@media (max-width: 576px) {
+    .navbar{
+        font-size: 13px;
+        line-height: 15px;
+    }
+
+    .active{
+        border-bottom: 0.2px solid black;
+    }
+
+    .navbar-brand{
+        display: none;
+    }
+}

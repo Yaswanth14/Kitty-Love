@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import "../../styles/AuthStyles.css"
@@ -77,7 +77,8 @@ const Signup = () => {
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
         </form>
-
+        <br />
+        <p>Already have an account? <Link className='homelink' to={'/signin'}>Signin</Link> </p>
         </div>
     </Layout>
   )

@@ -64,7 +64,7 @@ const Dashboard = () => {
    // Function to toggle isPrivate status
    const toggleIsPrivate = async () => {
     try {
-      const updatedIsPrivate = isPrivate === 1 ? 0 : 1; // Toggle the value
+      const updatedIsPrivate = isPrivate === true ? false : true; // Toggle the value
       await axios.put(`${import.meta.env.VITE_API}/user/private/${auth.user._id}`, { isPrivate: updatedIsPrivate });
       setIsPrivate(updatedIsPrivate); // Update the state
       toast.success("Privacy setting updated successfully");
@@ -89,8 +89,9 @@ const Dashboard = () => {
 
   return (
     <Layout>
+      <div className="container">
       <div className="row mt-3">
-        <div className="col-md-5 mt-2">
+        <div className="col-lg-6 mt-2">
           <h2 className='title'>Your Crush List</h2>
           <table className="table">
             <thead>
@@ -108,7 +109,7 @@ const Dashboard = () => {
             </tbody>
             </table>
         </div>
-        <div className="col-md-6 mt-2"> 
+        <div className="col-lg-10 mt-2"> 
           <div className="dm-section">
                   <h3 className='title'>Messages for you</h3>
                   <div className="toggle-is-private mb-2">
@@ -130,6 +131,7 @@ const Dashboard = () => {
                   </div>
           </div>
         </div>
+      </div>
       </div>
     </Layout>
   )};

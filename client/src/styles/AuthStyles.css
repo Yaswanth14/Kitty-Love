@@ -8,7 +8,11 @@
     background-color: rgb(118, 186, 223);
     background-image: linear-gradient(0deg, #f99cd4 0%, #9af4f1 100%);
     min-height: 84vh;
-    min-width: 80vh;
+}
+
+.homelink{
+    text-decoration: none;
+    color: rgb(31, 30, 30);
 }
 
 .form-container form{

@@ -70,8 +70,8 @@ const UserProfile = () => {
     return (
         <Layout>
             <div className="container">
-                <div className="row">
-                    <div className="col-lg-6 mt-5">
+                <div className="row mt-3">
+                    <div className="col-lg-6 mt-3">
                         <div className="profile-info">
                             <h2 className='title'>{name}</h2>
                             <p><span className='side-heading'>Username:</span> {username}</p>
@@ -98,7 +98,7 @@ const UserProfile = () => {
                                 <button className="btn btn-primary" onClick={handleAddToCrushList}>Add to Crush List</button>
                         </div>
                     </div>
-                    <div className="col-lg-6">
+                    <div className="col-lg-6 mt-6"><br /><br />
                         <div className="dm-section">
                             <h3 className='title'>Direct Messages</h3>
                             <div className="add-dm">

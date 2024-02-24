@@ -24,4 +24,7 @@ p{
     .profile-img {
         max-height: 80px; /* Adjust size for small screens */
     }
+    .container {
+        max-width: 400px;
+    }
 }
