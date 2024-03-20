@@ -1,0 +1,14 @@
+.crush_table {
+    overflow-x: scroll;
+    width: 200px;
+}
+
+.crush_table th {
+    padding: 10px 30px;
+}
+
+.crush_table td {
+    /* background-color: red; */
+    
+    padding: 10px 30px;
+}
