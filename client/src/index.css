@@ -1,93 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body {
+  background-color: #151128;
+  color: white;
 }
 
-/* font-family: 'Playfair Display', serif;
-font-family: 'Poppins', sans-serif; */
-
-/* navbar css */
-.navbar{
-    font-family: 'Poppins', sans-serif;
-    font-size: 17px;
-    line-height: 26px;
-    text-transform: uppercase;
-    box-shadow: 0 8px 6px -6px gray;
-    border-bottom: 0.3px solid gray !important;
+.gradient_bg {
+  background: rgb(253, 47, 166);
+  background: linear-gradient(
+    148deg,
+    rgba(253, 47, 166, 1) 0%,
+    rgba(248, 75, 77, 1) 61%
+  );
+}
+.gradient_bg2 {
+  background: rgb(253, 47, 166);
+  background: linear-gradient(
+    148deg,
+    rgba(248, 75, 77, 1) 0%,
+    rgba(253, 47, 166, 1) 61%
+  );
 }
 
-.nav_link{
-    font-weight: 300 !important;
-}
-
-.active{
-    border-bottom: 1px solid black;
-}
-
-.navbar-brand{
-    font-weight: 700;
-    font-family: "roboto", sans-serif;
-    letter-spacing: 3px;
-}
-
-
-/* page not found css */
-
-.pnf{
-    display: flex;
-    min-height: 65vh;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.pnf-title{
-    font-size: 100px;
-    font-weight: 700;
-}
-
-.pnf-heading{
-    font-weight: normal;
-}
-
-.pnf-btn{
-    color: black;
-    border: 1px solid black;
-    text-decoration: none;
-    padding: 10px;
-    margin-top: 10px;
-}
-
-.pnf-btn:hover{
-    background-color: black;
-    color: beige;
-}
-
-/* signup page */
-
-.signup{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 70vh;
-    flex-direction: column;
-}
-
-
-@media (max-width: 576px) {
-    .navbar{
-        font-size: 13px;
-        line-height: 15px;
-    }
-
-    .active{
-        border-bottom: 0.2px solid black;
-    }
-
-    .navbar-brand{
-        display: none;
-    }
+.text_shadow {
+  text-shadow: 0px -1px 7px rgba(255, 255, 255, 0.6);
 }
