@@ -14,7 +14,19 @@ import UserProfile from "./user/UserProfile";
 function App() {
   return (
     <>
-      <ToastContainer />
+      <ToastContainer
+      position="bottom-left"
+      autoClose={4000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+      transition: Bounce
+      />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/profiles" element={<PrivateRoute />}>

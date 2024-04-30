@@ -23,7 +23,7 @@ const HomePage = () => {
             </Link>
             <p>
               This is to maintain the integrity.
-              <br /> Eg: 21212kitty@gvpce.ac.in
+              <br /> Eg: 21212@gvpce.ac.in
             </p>
           </div>
         </div>

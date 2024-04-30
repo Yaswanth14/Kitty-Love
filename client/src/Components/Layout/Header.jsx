@@ -24,7 +24,7 @@ const Header = () => {
         className="w-screen fixed top-0 gradient_bg2 text-black"
         style={{ zIndex: 9999 }}
       >
-        <div className="flex h-[90px]">
+        <div className="flex h-[70px]">
           <div className="flex items-center justify-between w-screen px-5 max-[1000px]:px-2">
             {/* */}
             <div className="min-[1000px]:hidden absolute right-5 flex items-center justify-center">

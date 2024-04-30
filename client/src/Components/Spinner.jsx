@@ -14,7 +14,7 @@ const Spinner = () => {
   }, [count, navigate])
   return (
     <>
-        <div className="d-flex flex-column justify-content-center align-items-center"
+        <div className="spinner"
         style={{height: '100vh'}}>
 
           <h1 className='text-center'>redirecting in {count} secs</h1>
