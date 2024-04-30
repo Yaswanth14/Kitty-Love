@@ -1,12 +1,13 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const userRouter = require('./Router/userRouter');
-const cors = require('cors');
+const userRouter = require("./Router/userRouter");
+const statusRouter = require("./Router/statusRouter");
+const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
 
-app.use('/user', userRouter);
+app.use("/user", userRouter);
+app.use("/status", statusRouter);
 
-
-module.exports = app
+module.exports = app;
