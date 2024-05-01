@@ -27,7 +27,7 @@ const Header = () => {
         <div className="flex h-[70px]">
           <div className="flex items-center justify-between w-screen px-5 max-[1000px]:px-2">
             {/* */}
-            <div className="min-[1000px]:hidden absolute right-5 flex items-center justify-center">
+            <div className="min-[1000px]:hidden absolute right-0 flex items-center justify-center">
               {mobNav ? (
                 <CloseIcon
                   className="absolute right-3 text-white cursor-pointer"
@@ -97,7 +97,7 @@ const Header = () => {
         {mobNav && (
           <div>
             <ul
-              className="flex space-y-3 text-2xl text-white font-semibold h-[calc(100vh-90px)] w-screen fixed gradient_bg flex-col items-center justify-center
+              className="flex space-y-3 text-2xl text-white font-semibold fixed bg-[#fd2fa6] flex-col items-end justify-start p-3 pl-7 rounded-bl-md right-0
             "
             >
               <li>

@@ -38,7 +38,7 @@ const Profiles = () => {
   return (
     <Layout>
       <div className="pt-[90px]">
-        <div className="flex flex-wrap p-5 items-stretch justify-evenly">
+        <div className="flex flex-wrap p-2 items-stretch justify-evenly">
           {profiles?.map((user, index) => (
             <Link to={`/profile/${user.username}`} key={user._id}>
               <div className="bg-[#1b1735] shadow-[rgba(248,75,77,1)] shadow-md m-3 rounded-lg px-4 py-4 flex flex-col items-center space-y-2 h-[400px]">
