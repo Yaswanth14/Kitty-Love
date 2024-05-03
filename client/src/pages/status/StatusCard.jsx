@@ -1,10 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CommentIcon from "@mui/icons-material/Comment";
+import axios from "axios";
 
 function StatusCard({ data }) {
   const [like, setlike] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+  const [commentCount, setCommentCount] = useState(0);
+
+  useEffect(() => {
+    setLikeCount(data.likes);
+    setCommentCount(data.comments.length);
+  }, [data]);
+
+  const handleLike = async (like) => {
+    if (like === true) {
+      setlike(false);
+      setLikeCount(likeCount - 1);
+      let res = await axios.post(
+        `${import.meta.env.VITE_API}/status/like/${data._id}/0`
+      );
+      console.log(res.message);
+    } else if (like === false) {
+      setlike(true);
+      setLikeCount(likeCount + 1);
+      let res = await axios.post(
+        `${import.meta.env.VITE_API}/status/like/${data._id}/1`
+      );
+      console.log(res.message);
+    }
+  };
 
   // date and time formatter function
   function formatDate(dateString) {
@@ -43,20 +69,20 @@ function StatusCard({ data }) {
             {like ? (
               <FavoriteIcon
                 className="text-[#f84b4d] transform transition-transform duration-75 ease-linear hover:scale-150"
-                onClick={() => setlike(false)}
+                onClick={() => handleLike(true)}
                 fontSize="small"
               />
             ) : (
               <FavoriteBorderIcon
-                onClick={() => setlike(true)}
+                onClick={() => handleLike(false)}
                 fontSize="small"
               />
             )}
-            <p className="text-[10px]">24 likes</p>
+            <p className="text-[10px]">{likeCount} likes</p>
           </div>
           <div className="flex items-center space-x-1">
             <CommentIcon fontSize="small" />
-            <p className="text-[10px]">3 replies</p>
+            <p className="text-[10px]">{commentCount} replies</p>
           </div>
         </div>
         <p className="text-[10px] text-right">{formatDate(data.createdAt)}</p>

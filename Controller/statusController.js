@@ -36,3 +36,29 @@ module.exports.getStatus = async (req, res) => {
     });
   }
 };
+
+module.exports.postLike = async (req, res) => {
+  try {
+    const status = await Status.findById(req.params.id);
+    const value = req.params.value;
+    if (value == "1") {
+      status.likes = status.likes + 1;
+      status.save();
+    } else if (value == "0") {
+      status.likes = status.likes - 1;
+      status.save();
+    }
+    res.send({ message: "like success" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in liking the post",
+    });
+  }
+};
+
+module.exports.postComment = async (req, res) => {
+  const comment = "hey";
+  res.send({ message: "success" });
+};

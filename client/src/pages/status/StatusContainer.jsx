@@ -16,7 +16,7 @@ const StatusContainer = () => {
         );
         const status = response.data.status;
         // console.log(status);
-        setStatus([...status]);
+        setStatus([...status].reverse());
       } catch (error) {
         console.log(error);
       }
