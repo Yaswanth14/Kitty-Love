@@ -3,11 +3,13 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CommentIcon from "@mui/icons-material/Comment";
 import axios from "axios";
+import CommentsBox from "./CommentsBox";
 
 function StatusCard({ data }) {
   const [like, setlike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [commentCount, setCommentCount] = useState(0);
+  const [commentBox, setcommentBox] = useState(false);
 
   useEffect(() => {
     setLikeCount(data.likes);
@@ -29,6 +31,14 @@ function StatusCard({ data }) {
       );
     }
   };
+
+  function truncateToFiveChars(text) {
+    if (text.length <= 5) {
+      return text;
+    } else {
+      return text.substring(0, 5);
+    }
+  }
 
   // date and time formatter function
   function formatDate(dateString) {
@@ -78,13 +88,17 @@ function StatusCard({ data }) {
             )}
             <p className="text-[10px]">{likeCount} likes</p>
           </div>
-          <div className="flex items-center space-x-1">
+          <div
+            className="flex items-center space-x-1"
+            onClick={() => setcommentBox(true)}
+          >
             <CommentIcon fontSize="small" />
             <p className="text-[10px]">{commentCount} replies</p>
           </div>
         </div>
         <p className="text-[10px] text-right">{formatDate(data.createdAt)}</p>
       </div>
+      {commentBox && <CommentsBox msg={truncateToFiveChars(data.content)} />}
     </div>
   );
 }
