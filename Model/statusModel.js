@@ -19,7 +19,7 @@ module.exports.Status = model(
       comments: [
         {
           type: Schema.Types.ObjectId,
-          ref: "Comment",
+          ref: "Reply",
         },
       ],
       createdAt: {
@@ -32,8 +32,8 @@ module.exports.Status = model(
   )
 );
 
-module.exports.Comment = model(
-  "Comment",
+module.exports.Reply = model(
+  "Reply",
   Schema(
     {
       username: {
@@ -48,12 +48,10 @@ module.exports.Comment = model(
         type: Number,
         default: 0,
       },
-      comments: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: "Comment",
-        },
-      ],
+      root: {
+        type: Schema.Types.ObjectId,
+        ref: "Comment",
+      },
       createdAt: {
         type: Date,
         default: Date.now,

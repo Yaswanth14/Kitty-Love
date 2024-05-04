@@ -15,7 +15,6 @@ const StatusContainer = () => {
           `${import.meta.env.VITE_API}/status/get`
         );
         const status = response.data.status;
-        // console.log(status);
         setStatus([...status].reverse());
       } catch (error) {
         console.log(error);

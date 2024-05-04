@@ -21,14 +21,12 @@ function StatusCard({ data }) {
       let res = await axios.post(
         `${import.meta.env.VITE_API}/status/like/${data._id}/0`
       );
-      console.log(res.message);
     } else if (like === false) {
       setlike(true);
       setLikeCount(likeCount + 1);
       let res = await axios.post(
         `${import.meta.env.VITE_API}/status/like/${data._id}/1`
       );
-      console.log(res.message);
     }
   };
 
