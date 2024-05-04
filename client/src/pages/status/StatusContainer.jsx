@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import StatusCard from "./StatusCard";
+import ProfileSuggestionCard from "./ProfileSuggestionCard";
 
 const StatusContainer = () => {
   const [message, setMessage] = useState("");
@@ -72,10 +73,18 @@ const StatusContainer = () => {
           </button>
         </div>
       </div>
-      <div className="pt-[90px]">
-        {status?.map((status, index) => (
-          <StatusCard data={status} key={index} />
-        ))}
+      <div className="pt-[90px] flex min-[1050px]:space-x-5 min-[1050px]:px-5">
+        <div className="flex-1">
+          {status?.map((status, index) => (
+            <StatusCard data={status} key={index} />
+          ))}
+        </div>
+        <div className="w-[400px] pt-3 max-[1050px]:hidden">
+          <ProfileSuggestionCard />
+          <ProfileSuggestionCard />
+          <ProfileSuggestionCard />
+          <ProfileSuggestionCard />
+        </div>
       </div>
     </div>
   );
