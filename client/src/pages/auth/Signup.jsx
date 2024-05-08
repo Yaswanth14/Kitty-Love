@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -62,6 +62,10 @@ const Signup = () => {
       }
     }
   };
+
+  useEffect(() => {
+    document.title = "Register @Kitty-Love 💕";
+  }, []);
 
   return (
     <Layout>

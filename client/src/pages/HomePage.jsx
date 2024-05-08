@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../components/Layout/Layout";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/Auth";
@@ -12,6 +12,11 @@ const HomePage = () => {
   function doRedirect() {
     navigate("/signup");
   }
+
+  useEffect(() => {
+    document.title = "Kitty-Love 💕";
+  }, []);
+
   return <Layout>{auth.user ? <StatusContainer /> : <HomeContainer />}</Layout>;
 };
 

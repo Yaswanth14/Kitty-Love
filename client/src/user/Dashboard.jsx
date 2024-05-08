@@ -45,6 +45,7 @@ const Dashboard = () => {
       }
     };
     getDms();
+    document.title = "My dashboard @Kitty-Love 💕";
   }, []);
 
   useEffect(() => {

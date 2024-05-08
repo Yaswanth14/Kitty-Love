@@ -35,6 +35,7 @@ const MyProfile = () => {
   useEffect(() => {
     getSingleUser();
     //eslint-disable-next-line
+    document.title = "My profile @Kitty-Love 💕";
   }, []);
 
   //create product function
@@ -72,7 +73,7 @@ const MyProfile = () => {
     <Layout>
       <div className="pt-[90px]">
         <h1 className="text-center text-white font-semibold text-2xl mt-3">
-          Update User Profile
+          Update your profile
         </h1>
         <div className="bg-[#1b1735] my-3 mx-10 p-5 rounded-md flex flex-col items-center">
           <form onSubmit={handleUpdate}>

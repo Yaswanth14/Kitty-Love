@@ -14,6 +14,10 @@ const Profiles = () => {
     fetchProfiles();
   }, [page]);
 
+  useEffect(() => {
+    document.title = "Profiles @Kitty-Love 💕";
+  }, []);
+
   // Fetch profiles
   const fetchProfiles = async () => {
     try {
