@@ -39,6 +39,7 @@ const UserProfile = () => {
     };
 
     getSingleUser();
+    document.title = `${params.username} @Kitty-Love 💕`;
   }, [params.username]);
 
   const handleAddDm = async () => {

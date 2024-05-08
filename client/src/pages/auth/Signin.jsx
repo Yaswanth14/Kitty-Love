@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -38,6 +38,10 @@ const Signin = () => {
       toast.error(res.data.message);
     }
   };
+
+  useEffect(() => {
+    document.title = "Login @Kitty-Love 💕";
+  }, []);
 
   return (
     <Layout>
