@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Layout from "./../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import SearchIcon from "@mui/icons-material/Search";
-// import "../styles/CardStyle.css";
 import { useSearchParams } from "react-router-dom";
+import { debounce } from "lodash";
 
 const Profiles = () => {
   const [profiles, setProfiles] = useState([]);
@@ -13,12 +13,15 @@ const Profiles = () => {
   const [hasMore, setHasMore] = useState(false);
   const [focussed, setfocussed] = useState(false);
   const [searchKey, setsearchKey] = useState("");
+  const [suggestions, setsuggestions] = useState([]);
+  const [suggestionBox, setsuggestionBox] = useState(false);
 
   useEffect(() => {
     fetchProfiles();
   }, [page]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    if (e) e.preventDefault();
     try {
       const queryParams = new URLSearchParams();
       queryParams.set("q", searchKey);
@@ -32,9 +35,40 @@ const Profiles = () => {
     }
   };
 
+  const fetchSuggestions = async () => {
+    try {
+      const queryParams = new URLSearchParams();
+      queryParams.set("q", searchKey);
+      const response = await axios.get(
+        `${import.meta.env.VITE_API}/user/search?${queryParams.toString()}`
+      );
+      console.log(response);
+      setsuggestions(response.data.users);
+      setsuggestionBox(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const debouncedHandleSubmit = useCallback(debounce(fetchSuggestions, 300), [
+    searchKey,
+  ]);
+
   useEffect(() => {
     document.title = "Profiles @Kitty-Love 💕";
+
+    window.addEventListener("scroll", () => setsuggestionBox(false));
+
+    return () => {
+      window.removeEventListener("scroll", () => setsuggestionBox(false));
+    };
   }, []);
+
+  useEffect(() => {
+    if (searchKey) {
+      debouncedHandleSubmit();
+    }
+  }, [searchKey, debouncedHandleSubmit]);
 
   // Fetch profiles
   const fetchProfiles = async () => {
@@ -70,7 +104,10 @@ const Profiles = () => {
               }`,
             }}
             onFocus={() => setfocussed(true)} // Set focus state to true when the div is focused
-            onBlur={() => setfocussed(false)} // Set focus state to false when the div loses focus
+            onBlur={() => {
+              setfocussed(false);
+              // setsuggestionBox(false);
+            }} // Set focus state to false when the div loses focus
             tabIndex={0}
           >
             <div className="flex items-center space-x-3">
@@ -83,29 +120,52 @@ const Profiles = () => {
                   type="text"
                   placeholder="Search profiles"
                   className="w-full text-lg bg-transparent outline-none h-[50px]"
-                  onChange={(e) => setsearchKey(e.target.value)}
+                  onChange={(e) => {
+                    setsearchKey(e.target.value);
+                  }}
                 />
+                {/* search suggestions */}
+                {suggestionBox == true && (
+                  <div
+                    className="w-full bg-transparent h-[calc(100vh-70px)] fixed top-[70px] left-0 flex justify-center items-start pt-[120px]"
+                    onClick={() => setsuggestionBox(false)}
+                  >
+                    <div className="gradient_bg rounded-md w-[70vw] max-[800px]:w-[90vw] flex flex-col p-2">
+                      {/*  absolute left-[50%] -translate-x-[51%] */}
+                      {suggestions.map((e, i) => (
+                        <Link
+                          to={`/profile/${e.username}`}
+                          key={e.username + i}
+                          className="bg-[#ffffff4d] text-white font-semibold rounded-sm my-1 px-3 py-2"
+                        >
+                          <h1>{e.name}</h1>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                <button
+                  // onClick={handleSubmit}
+                  // type="submit"
+                  onClick={(e) => {
+                    if (searchKey == "") {
+                      toast.error("Type a name or email to search!");
+                    } else {
+                      handleSubmit();
+                    }
+                  }}
+                  className="gradient_bg w-10 h-10 font-extrabold text-white rounded-full"
+                >
+                  <SearchIcon />
+                </button>
               </form>
-              <button
-                // onClick={handleSubmit}
-                onClick={() => {
-                  if (searchKey == "") {
-                    toast.error("Type a name or email to search!");
-                  } else {
-                    handleSubmit();
-                  }
-                }}
-                className="gradient_bg w-10 h-10 font-extrabold text-white rounded-full"
-              >
-                <SearchIcon />
-              </button>
             </div>
           </div>
         </div>
         {/*  */}
         <div className="flex flex-wrap p-2 items-stretch justify-evenly">
           {profiles?.map((user, index) => (
-            <Link to={`/profile/${user.username}`} key={user._id}>
+            <Link to={`/profile/${user.username}`} key={index}>
               <div className="bg-[#1b1735] shadow-[rgba(248,75,77,1)] shadow-md m-3 rounded-lg px-4 py-4 flex flex-col items-center space-y-2 h-[400px]">
                 <p>
                   <span className="text-[rgba(248,75,77,1)]">
