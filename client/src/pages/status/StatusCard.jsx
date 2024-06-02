@@ -8,12 +8,10 @@ import CommentsBox from "./CommentsBox";
 function StatusCard({ data }) {
   const [like, setlike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
-  const [commentCount, setCommentCount] = useState(0);
   const [commentBox, setcommentBox] = useState(false);
 
   useEffect(() => {
     setLikeCount(data.likes);
-    setCommentCount(data.comments.length);
   }, [data]);
 
   const handleLike = async (like) => {
@@ -93,12 +91,17 @@ function StatusCard({ data }) {
             onClick={() => setcommentBox(true)}
           >
             <CommentIcon fontSize="small" />
-            <p className="text-[10px]">{commentCount} replies</p>
+            <p className="text-[10px]">replies</p>
           </div>
         </div>
         <p className="text-[10px] text-right">{formatDate(data.createdAt)}</p>
       </div>
-      {commentBox && <CommentsBox msg={truncateToFiveChars(data.content)} />}
+      {commentBox && (
+        <CommentsBox
+          msg={truncateToFiveChars(data.content)}
+          postId={data._id}
+        />
+      )}
     </div>
   );
 }

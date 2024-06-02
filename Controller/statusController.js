@@ -82,10 +82,10 @@ module.exports.postReply = async (req, res) => {
 module.exports.getReplies = async (req, res) => {
   try {
     const id = req.params.id;
-    const replies = await Reply.find({ _id: { $in: id } }).select(
+    const replies = await Reply.find({ root: { $in: id } }).select(
       "content likes createdAt"
     );
-    res.status(500).send({ success: true, replies });
+    res.status(200).send({ success: true, replies });
   } catch (error) {
     console.log(error);
     res.status(500).send({

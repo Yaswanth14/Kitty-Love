@@ -16,12 +16,6 @@ module.exports.Status = model(
         type: Number,
         default: 0,
       },
-      comments: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: "Reply",
-        },
-      ],
       createdAt: {
         type: Date,
         default: Date.now,
@@ -50,7 +44,7 @@ module.exports.Reply = model(
       },
       root: {
         type: Schema.Types.ObjectId,
-        ref: "Comment",
+        ref: "Status",
       },
       createdAt: {
         type: Date,
