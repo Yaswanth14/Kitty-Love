@@ -33,7 +33,7 @@ function CommentsBox({ msg, postId }) {
         { reply: newReply }
       );
       if (response.data.success) {
-        setReplies([...replies, response.data.reply]);
+        setReplies([response.data.reply, ...replies]);
         setNewReply("");
       }
     } catch (error) {

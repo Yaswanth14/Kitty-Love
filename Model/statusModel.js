@@ -16,6 +16,12 @@ module.exports.Status = model(
         type: Number,
         default: 0,
       },
+      likedBy: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "User",
+        },
+      ],
       createdAt: {
         type: Date,
         default: Date.now,
@@ -38,18 +44,24 @@ module.exports.Reply = model(
         type: String,
         required: true,
       },
+      root: {
+        type: Schema.Types.ObjectId,
+        ref: "Status",
+        required: true,
+      },
       likes: {
         type: Number,
         default: 0,
       },
-      root: {
-        type: Schema.Types.ObjectId,
-        ref: "Status",
-      },
+      likedBy: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "User",
+        },
+      ],
       createdAt: {
         type: Date,
         default: Date.now,
-        index: { expires: 60 * 60 * 24 * 7 },
       },
     },
     { timestamps: true }

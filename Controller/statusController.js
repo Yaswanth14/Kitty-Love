@@ -40,15 +40,30 @@ module.exports.getStatus = async (req, res) => {
 module.exports.postLike = async (req, res) => {
   try {
     const status = await Status.findById(req.params.id);
+    const userId = req._id; // Assuming you have user ID in req.user
     const value = req.params.value;
+
     if (value == "1") {
-      status.likes = status.likes + 1;
-      status.save();
+      if (!status.likedBy.includes(userId)) {
+        status.likes += 1;
+        status.likedBy.push(userId);
+        await status.save();
+        res.send({ message: "Like success" });
+      } else {
+        res.status(400).send({ message: "User already liked this status" });
+      }
     } else if (value == "0") {
-      status.likes = status.likes - 1;
-      status.save();
+      if (status.likedBy.includes(userId)) {
+        status.likes -= 1;
+        status.likedBy = status.likedBy.filter(
+          (id) => id.toString() !== userId
+        );
+        await status.save();
+        res.send({ message: "Unlike success" });
+      } else {
+        res.status(400).send({ message: "User hasn't liked this status" });
+      }
     }
-    res.send({ message: "like success" });
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -85,7 +100,8 @@ module.exports.getReplies = async (req, res) => {
     const replies = await Reply.find({ root: { $in: id } }).select(
       "content likes createdAt"
     );
-    res.status(200).send({ success: true, replies });
+    revReplies = [...replies].reverse();
+    res.status(200).send({ success: true, replies: revReplies });
   } catch (error) {
     console.log(error);
     res.status(500).send({

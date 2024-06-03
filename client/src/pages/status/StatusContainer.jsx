@@ -3,11 +3,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import StatusCard from "./StatusCard";
 import ProfileSuggestionCard from "./ProfileSuggestionCard";
+import { useAuth } from "../../context/Auth";
 
 const StatusContainer = () => {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState([]);
   const [focussed, setfocussed] = useState(false);
+  const [auth, setAuth] = useAuth();
 
   useEffect(() => {
     const getStatus = async () => {
@@ -75,7 +77,7 @@ const StatusContainer = () => {
       <div className="pt-[90px] flex min-[1050px]:space-x-5 min-[1050px]:px-5">
         <div className="flex-1">
           {status?.map((status, index) => (
-            <StatusCard data={status} key={index} />
+            <StatusCard data={status} key={index} userId={auth.user._id} />
           ))}
         </div>
         <div className="w-[400px] pt-3 max-[1050px]:hidden">

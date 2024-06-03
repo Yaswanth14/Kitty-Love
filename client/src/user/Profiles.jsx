@@ -178,7 +178,7 @@ const Profiles = () => {
                 <div className="h-[250px] w-[250px] rounded-full p-5">
                   <img
                     src={
-                      user.hasphoto
+                      user.hasphoto == true
                         ? `${import.meta.env.VITE_API}/user/profile-photo/${
                             user._id
                           }`

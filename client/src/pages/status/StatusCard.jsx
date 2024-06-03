@@ -5,40 +5,40 @@ import CommentIcon from "@mui/icons-material/Comment";
 import axios from "axios";
 import CommentsBox from "./CommentsBox";
 
-function StatusCard({ data }) {
-  const [like, setlike] = useState(false);
+function StatusCard({ data, userId }) {
+  const [like, setLike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
-  const [commentBox, setcommentBox] = useState(false);
+  const [commentBox, setCommentBox] = useState(false);
 
   useEffect(() => {
     setLikeCount(data.likes);
-  }, [data]);
+    setLike(data.likedBy.includes(userId));
+  }, [data, userId]);
 
   const handleLike = async (like) => {
-    if (like === true) {
-      setlike(false);
-      setLikeCount(likeCount - 1);
-      let res = await axios.post(
-        `${import.meta.env.VITE_API}/status/like/${data._id}/0`
-      );
-    } else if (like === false) {
-      setlike(true);
-      setLikeCount(likeCount + 1);
-      let res = await axios.post(
-        `${import.meta.env.VITE_API}/status/like/${data._id}/1`
-      );
+    try {
+      if (like) {
+        await axios.post(
+          `${import.meta.env.VITE_API}/status/like/${data._id}/0`
+        );
+        setLike(false);
+        setLikeCount(likeCount - 1);
+      } else {
+        await axios.post(
+          `${import.meta.env.VITE_API}/status/like/${data._id}/1`
+        );
+        setLike(true);
+        setLikeCount(likeCount + 1);
+      }
+    } catch (error) {
+      console.error("Error updating like status:", error);
     }
   };
 
   function truncateToFiveChars(text) {
-    if (text.length <= 5) {
-      return text;
-    } else {
-      return text.substring(0, 5);
-    }
+    return text.length <= 5 ? text : text.substring(0, 5);
   }
 
-  // date and time formatter function
   function formatDate(dateString) {
     const date = new Date(dateString);
     const now = new Date();
@@ -68,7 +68,6 @@ function StatusCard({ data }) {
   return (
     <div className="bg-[#1b1735] my-3 p-2 pb-3 px-3 rounded-md">
       <p className="font-semibold text-md my-2">{data.content}</p>
-      {/* btns and createdAt */}
       <div className="flex justify-between items-end">
         <div className="flex items-center space-x-2">
           <div className="flex items-center space-x-1">
@@ -88,7 +87,7 @@ function StatusCard({ data }) {
           </div>
           <div
             className="flex items-center space-x-1"
-            onClick={() => setcommentBox(true)}
+            onClick={() => setCommentBox(true)}
           >
             <CommentIcon fontSize="small" />
             <p className="text-[10px]">replies</p>
