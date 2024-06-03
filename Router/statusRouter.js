@@ -5,6 +5,7 @@ const {
   postLike,
   postReply,
   getReplies,
+  postLikeReply,
 } = require("../Controller/statusController");
 
 const router = Router();
@@ -15,5 +16,6 @@ router.post("/post", userMiddleware, postStatus);
 router.post("/like/:id/:value", userMiddleware, postLike);
 router.post("/reply/:id", userMiddleware, postReply);
 router.get("/replies/:id", userMiddleware, getReplies);
+router.post("/reply/like/:id/:value", userMiddleware, postLikeReply);
 
 module.exports = router;

@@ -99,6 +99,7 @@ function StatusCard({ data, userId }) {
         <CommentsBox
           msg={truncateToFiveChars(data.content)}
           postId={data._id}
+          userId={userId}
         />
       )}
     </div>

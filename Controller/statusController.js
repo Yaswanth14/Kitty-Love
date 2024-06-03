@@ -98,7 +98,7 @@ module.exports.getReplies = async (req, res) => {
   try {
     const id = req.params.id;
     const replies = await Reply.find({ root: { $in: id } }).select(
-      "content likes createdAt"
+      "content likes createdAt likedBy"
     );
     revReplies = [...replies].reverse();
     res.status(200).send({ success: true, replies: revReplies });
@@ -107,6 +107,40 @@ module.exports.getReplies = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Error in getting replies",
+    });
+  }
+};
+
+module.exports.postLikeReply = async (req, res) => {
+  try {
+    const reply = await Reply.findById(req.params.id);
+    const userId = req._id; // Assuming you have user ID in req.user
+    const value = req.params.value;
+
+    if (value == "1") {
+      if (!reply.likedBy.includes(userId)) {
+        reply.likes += 1;
+        reply.likedBy.push(userId);
+        await reply.save();
+        res.send({ message: "Like success" });
+      } else {
+        res.status(400).send({ message: "User already liked this reply" });
+      }
+    } else if (value == "0") {
+      if (reply.likedBy.includes(userId)) {
+        reply.likes -= 1;
+        reply.likedBy = reply.likedBy.filter((id) => id.toString() !== userId);
+        await reply.save();
+        res.send({ message: "Unlike success" });
+      } else {
+        res.status(400).send({ message: "User hasn't liked this reply" });
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in liking the reply",
     });
   }
 };
