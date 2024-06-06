@@ -73,7 +73,7 @@ function StatusCard({ data, userId }) {
           <div className="flex items-center space-x-1">
             {like ? (
               <FavoriteIcon
-                className="text-[#f84b4d] transform transition-transform duration-75 ease-linear hover:scale-150"
+                className="text-[#f84b4d] transform transition-transform duration-75 ease-linear hover:scale-150 cursor-pointer"
                 onClick={() => handleLike(true)}
                 fontSize="small"
               />
@@ -81,6 +81,7 @@ function StatusCard({ data, userId }) {
               <FavoriteBorderIcon
                 onClick={() => handleLike(false)}
                 fontSize="small"
+                className="cursor-pointer"
               />
             )}
             <p className="text-[10px]">{likeCount} likes</p>
@@ -89,7 +90,7 @@ function StatusCard({ data, userId }) {
             className="flex items-center space-x-1"
             onClick={() => setCommentBox(true)}
           >
-            <CommentIcon fontSize="small" />
+            <CommentIcon fontSize="small" className="cursor-pointer" />
             <p className="text-[10px]">replies</p>
           </div>
         </div>

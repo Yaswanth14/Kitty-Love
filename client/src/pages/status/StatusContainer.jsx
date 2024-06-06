@@ -10,6 +10,7 @@ const StatusContainer = () => {
   const [status, setStatus] = useState([]);
   const [focussed, setfocussed] = useState(false);
   const [auth, setAuth] = useAuth();
+  const [suggestions, setsuggestions] = useState([]);
 
   useEffect(() => {
     const getStatus = async () => {
@@ -25,6 +26,20 @@ const StatusContainer = () => {
     };
 
     getStatus();
+
+    const getSuggestions = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API}/user/recent-users`
+        );
+        if (response.data.success) {
+          setsuggestions(response.data.users);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getSuggestions();
   }, []);
 
   const handleSubmit = async () => {
@@ -81,10 +96,13 @@ const StatusContainer = () => {
           ))}
         </div>
         <div className="w-[400px] pt-3 max-[1050px]:hidden">
+          {/* <ProfileSuggestionCard />
           <ProfileSuggestionCard />
           <ProfileSuggestionCard />
-          <ProfileSuggestionCard />
-          <ProfileSuggestionCard />
+          <ProfileSuggestionCard /> */}
+          {suggestions.map((e, i) => (
+            <ProfileSuggestionCard key={i} data={e} />
+          ))}
         </div>
       </div>
     </div>

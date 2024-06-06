@@ -83,8 +83,7 @@ const UserProfile = () => {
               <img
                 src={`${import.meta.env.VITE_API}/user/profile-photo/${id}`}
                 alt="profile photo"
-                // height={"180px"}
-                className="rounded-full m-2 h-[200px] max-[800px]:h-[100px]"
+                className="rounded-full m-2 h-[200px] w-[200px] max-[800px]:h-[100px] max-[800px]:w-[100px] object-cover"
               />
               <img
                 src={`https://robohash.org/${username}?set=set4`}
