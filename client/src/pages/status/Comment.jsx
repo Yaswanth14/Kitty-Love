@@ -38,7 +38,7 @@ function Comment({ reply, userId }) {
       <div className="flex flex-col items-center justify-center pr-2 pt-2 ml-auto">
         {like ? (
           <FavoriteIcon
-            className="text-[#f84b4d] transform transition-transform duration-75 ease-linear hover:scale-150"
+            className="text-[#f84b4d] transform transition-transform duration-75 ease-linear hover:scale-150 cursor-pointer"
             onClick={() => handleLike(true)}
             fontSize="small"
           />
@@ -46,6 +46,7 @@ function Comment({ reply, userId }) {
           <FavoriteBorderIcon
             onClick={() => handleLike(false)}
             fontSize="small"
+            className="cursor-pointer"
           />
         )}
         <p className="text-[10px]">{likeCount}</p>

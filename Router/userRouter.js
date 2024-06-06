@@ -6,6 +6,7 @@ const {
   getSingleProfile,
   getProfilePhoto,
   searchProfiles,
+  getRecentUsers,
 } = require("../Controller/profileController");
 const {
   sendDm,
@@ -37,6 +38,7 @@ router.get("/crush/:pid", getCrushDetails);
 router.get("/dms/:pid", userMiddleware, getDms); // Get dms of the user
 
 router.get("/search", userMiddleware, searchProfiles); // Get profiles from search query
+router.get("/recent-users", userMiddleware, getRecentUsers); // get profile suggestions || recent users
 
 router.put("/private/:userId", updatePrivate);
 

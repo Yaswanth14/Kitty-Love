@@ -184,7 +184,7 @@ const Profiles = () => {
                           }`
                         : `https://robohash.org/${user.username}?set=set4`
                     }
-                    alt={user.gender}
+                    // alt={user.gender}
                   />
                 </div>
                 <div className="flex flex-col items-center">

@@ -22,7 +22,8 @@ function CommentsBox({ msg, postId, userId }) {
     fetchReplies();
   }, [postId]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API}/status/reply/${postId}`,
@@ -37,7 +38,10 @@ function CommentsBox({ msg, postId, userId }) {
 
   return (
     <div className="mt-3">
-      <div className="flex items-center justify-between space-x-2">
+      <form
+        className="flex items-center justify-between space-x-2"
+        onSubmit={handleSubmit}
+      >
         <input
           type="text"
           placeholder={`replying to "${msg}..."`}
@@ -47,13 +51,14 @@ function CommentsBox({ msg, postId, userId }) {
         />
         <div>
           <button
-            onClick={handleSubmit}
+            // onClick={handleSubmit}
+            type="submit"
             className="gradient_bg font-extrabold text-white rounded-full w-[40px] h-[40px] flex justify-center items-center"
           >
             <SendIcon className="rotate-[-45deg]" fontSize="small" />
           </button>
         </div>
-      </div>
+      </form>
       <div className="my-2 bg-[#151128] py-2 px-3 rounded-md overflow-y-scroll max-h-[300px]">
         {replies.length > 0 ? (
           replies.map((reply) => (
