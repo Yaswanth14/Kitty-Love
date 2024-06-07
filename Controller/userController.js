@@ -36,13 +36,13 @@ module.exports.signUp = async (req, res) => {
     });
     const email = req.body.email;
     const username = email.split("@")[0].toLowerCase();
-    const emailRegex = /^.{10}@gvpce\.ac\.in$/;
-    if (!emailRegex.test(email)) {
+    const emailRegex1 = /^.{10}@gvpce\.ac\.in$/;
+    const emailRegex2 = /^.{12}@gvpce\.ac\.in$/;
+    if (!emailRegex1.test(email) || !emailRegex2.test(email)) {
       return res
         .status(400)
         .json({ success: false, message: "Only domain mails are accepted" });
     }
-    console.log(OTP);
 
     const mailOptions = {
       from: process.env.AUTH_EMAIL,
