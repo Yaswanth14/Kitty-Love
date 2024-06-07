@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import Layout from "./../components/Layout/Layout";
+import Layout from "./../Components/Layout/Layout";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";

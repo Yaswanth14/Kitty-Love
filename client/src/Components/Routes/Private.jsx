@@ -5,7 +5,7 @@ import Spinner from "../Spinner";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default function Private() {
+export default function PrivateRoute() {
   const [ok, setOk] = useState(false);
   const [auth, setAuth] = useAuth();
 
