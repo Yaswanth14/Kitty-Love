@@ -54,7 +54,7 @@ module.exports.getProfiles = async (req, res) => {
 
     // Fetch profiles based on pagination
     const users = await User.find({})
-      .select("name email gender bio username") // Exclude photo and dms fields
+      .select("name email gender bio username hasphoto") // Exclude photo and dms fields
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit);

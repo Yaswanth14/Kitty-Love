@@ -127,7 +127,7 @@ const UserProfile = () => {
                 placeholder="Enter your message"
                 value={newDm}
                 onChange={(e) => setNewDm(e.target.value)}
-                className="flex-1 gradient_bg2 text-white placeholder:text-white px-3 py-2 rounded-md font-semibold outline-none"
+                className="flex-1 gradient_bg2 text-white placeholder:text-[rgba(255,255,255,0.5)] px-3 py-2 rounded-md font-semibold outline-none"
               />
               <button
                 onClick={handleAddDm}

@@ -125,7 +125,7 @@ const Dashboard = () => {
 
           <div className="pl-5 flex-1 max-[1200px]:pl-1">
             <div>
-              <h3 className="text-2xl">Messages</h3>
+              <h3 className="text-2xl">Messages for you</h3>
               <div className="my-2">
                 <label>
                   <input

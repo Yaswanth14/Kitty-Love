@@ -97,7 +97,7 @@ const Signup = () => {
                 <input
                   value={email}
                   type="email"
-                  placeholder="Email"
+                  placeholder="Domain Email"
                   className="bg-transparent outline-none placeholder:text-white text-xl py-2 border-b-2 my-2"
                   onChange={(e) => setEmail(e.target.value)}
                   required

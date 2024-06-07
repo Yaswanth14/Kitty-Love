@@ -10,7 +10,7 @@ const MyProfile = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [bio, setBio] = useState("");
+  const [bio, setBio] = useState("Hey there! I'm using KittyLove");
   const [username, setUsername] = useState("");
   const [gender, setGender] = useState("");
   const [photo, setPhoto] = useState("");
@@ -96,7 +96,6 @@ const MyProfile = () => {
                         import.meta.env.VITE_API
                       }/user/profile-photo/${id}`}
                       alt="profile photo"
-                      // height={"200px"}
                       className="h-[200px] rounded-full m-1"
                     />
                     <img
@@ -121,7 +120,6 @@ const MyProfile = () => {
               </div>
             </div>
 
-            {/* <div className=""> */}
             <div className="flex flex-col items-center">
               <div className="flex flex-col items-end space-y-3">
                 <div>
@@ -130,7 +128,7 @@ const MyProfile = () => {
                   </label>
                   <input
                     type="text"
-                    className="bg-transparent w-[200px] pl-1 text-white font-normal ml-3 outline-none placeholder:text-white text-xl my-2"
+                    className="bg-[#2c2a52] w-[200px] pl-1 text-white font-normal ml-3 outline-none placeholder:text-[rgba(255,255,255,0.5)] text-xl my-2 cursor-not-allowed"
                     value={username}
                     placeholder="Enter your username"
                     readOnly
@@ -139,7 +137,7 @@ const MyProfile = () => {
                 <div>
                   <label className="text-[rgba(250,250,250,0.5)]">Email</label>
                   <input
-                    className="bg-transparent w-[200px] pl-1 text-white font-normal ml-3 outline-none placeholder:text-white text-xl my-2"
+                    className="bg-[#2c2a52] w-[200px] pl-1 text-white font-normal ml-3 outline-none placeholder:text-[rgba(255,255,255,0.5)] text-xl my-2 cursor-not-allowed"
                     type="text"
                     value={email}
                     placeholder="Enter your email"
@@ -149,7 +147,7 @@ const MyProfile = () => {
                 <div>
                   <label className="text-[rgba(250,250,250,0.5)]">Gender</label>
                   <select
-                    className="bg-transparent w-[200px] text-white font-normal ml-3 outline-none placeholder:text-white text-xl my-2"
+                    className="bg-[#2c2a52] w-[200px] text-white font-normal ml-3 outline-none placeholder:text-[rgba(255,255,255,0.5)] text-xl my-2"
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
                     required
@@ -168,12 +166,10 @@ const MyProfile = () => {
                     </option>
                   </select>
                 </div>
-                {/* </div> */}
-                {/* <div> */}
                 <div>
                   <label className="text-[rgba(250,250,250,0.5)]">Name</label>
                   <input
-                    className="bg-transparent w-[200px] pl-1 text-white font-normal ml-3 outline-none placeholder:text-white text-xl my-2"
+                    className="bg-[#2c2a52] w-[200px] pl-1 text-white font-normal ml-3 outline-none placeholder:text-[rgba(255,255,255,0.5)] text-xl my-2"
                     type="text"
                     value={name}
                     maxLength={25}
@@ -182,12 +178,10 @@ const MyProfile = () => {
                     required
                   />
                 </div>
-
-                {/* </div> */}
                 <div>
                   <label className="text-[rgba(250,250,250,0.5)]">Bio</label>
                   <input
-                    className="bg-transparent w-[200px] pl-1 text-white font-normal ml-3 outline-none placeholder:text-white text-xl my-2"
+                    className="bg-[#2c2a52] w-[200px] pl-1 text-white font-normal ml-3 outline-none placeholder:text-[rgba(255,255,255,0.5)] text-xl my-2"
                     type="text"
                     value={bio}
                     maxLength={50}
