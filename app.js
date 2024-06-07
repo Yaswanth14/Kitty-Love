@@ -5,6 +5,13 @@ const statusRouter = require("./Router/statusRouter");
 const cors = require("cors");
 
 app.use(cors());
+// app.use(
+//     cors({
+//       origin: ["https://ecofriends-beta.vercel.app"],
+//       methods: ["POST", "GET", "PUT"],
+//       credentials: true,
+//     })
+//   );
 app.use(express.json());
 
 app.use("/user", userRouter);
