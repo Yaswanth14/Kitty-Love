@@ -188,8 +188,8 @@ const HomeContainer = () => {
         </p>
         <p className="text-gray-600 mt-2">
           If you find any message disturbing or abusive, kindly report it to{" "}
-          <a href="mailto:kittylove@gmail.com" className="text-blue-500">
-            kittylove@gmail.com
+          <a href="mailto:kittylove.team@gmail.com" className="text-blue-500">
+            kittylove.team@gmail.com
           </a>{" "}
           with an image of the message.
         </p>
