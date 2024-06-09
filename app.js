@@ -8,7 +8,7 @@ const cors = require("cors");
 app.use(
   cors({
     origin: ["https://mykittylove.vercel.app"],
-    methods: ["POST", "GET", "PUT"],
+    methods: ["POST", "GET", "PUT","DELETE","PATCH"],
     credentials: true,
   })
 );
