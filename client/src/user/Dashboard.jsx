@@ -116,7 +116,7 @@ const Dashboard = () => {
                   <UserDetailsCard
                     key={user._id}
                     user={user}
-                    removeFromCrushlist={removeFromCrushlist}
+                    removeFromCrushlist={() => removeFromCrushlist(user._id)}
                   />
                 ))}
               </tbody>
