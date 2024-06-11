@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import Layout from "./../Components/Layout/Layout";
+import Layout from "./../components/Layout/Layout";
 import { useNavigate } from "react-router-dom";
 import "../styles/TableStyles.css";
 import { useAuth } from "../context/Auth";
@@ -116,7 +116,7 @@ const Dashboard = () => {
                   <UserDetailsCard
                     key={user._id}
                     user={user}
-                    removeFromCrushlist={removeFromCrushlist}
+                    removeFromCrushlist={() => removeFromCrushlist(user._id)}
                   />
                 ))}
               </tbody>

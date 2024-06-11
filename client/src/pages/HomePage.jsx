@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Layout from "../Components/Layout/Layout";
+import Layout from "../components/Layout/Layout";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/Auth";
 import HomeContainer from "./status/HomeContainer";

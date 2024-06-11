@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import Comment from "./Comment";
 import axios from "axios";
+import Loader from "../../Loader";
 
 function CommentsBox({ msg, postId, userId }) {
-  const [replies, setReplies] = useState([]);
+  const [replies, setReplies] = useState(null);
   const [reply, setReply] = useState("");
+  const [zeroReplies, setzeroReplies] = useState(false);
 
   useEffect(() => {
     const fetchReplies = async () => {
@@ -14,6 +16,10 @@ function CommentsBox({ msg, postId, userId }) {
           `${import.meta.env.VITE_API}/status/replies/${postId}`
         );
         setReplies(response.data.replies);
+        // setnoreplies(true);
+        if (response.data.replies.length == 0) {
+          setzeroReplies(true);
+        }
       } catch (error) {
         console.error("Error fetching replies:", error);
       }
@@ -60,11 +66,14 @@ function CommentsBox({ msg, postId, userId }) {
         </div>
       </form>
       <div className="my-2 bg-[#151128] py-2 px-3 rounded-md overflow-y-scroll max-h-[300px]">
-        {replies.length > 0 ? (
+        {replies ? (
           replies.map((reply) => (
             <Comment key={reply._id} reply={reply} userId={userId} />
           ))
         ) : (
+          <Loader text="Loading replies" />
+        )}
+        {zeroReplies && (
           <p className="text-center text-gray-500">
             No one commented on this post yet
           </p>

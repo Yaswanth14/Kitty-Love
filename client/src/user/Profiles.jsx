@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import Layout from "./../Components/Layout/Layout";
+import Layout from "./../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -196,7 +196,16 @@ const Profiles = () => {
             </Link>
           ))}
         </div>
-        {hasMore && <button onClick={loadMoreProfiles}>Load More</button>}
+        {hasMore && (
+          <div className="flex px-3 justify-center mb-3">
+            <button
+              onClick={loadMoreProfiles}
+              className="gradient_bg px-3 py-2 rounded-md"
+            >
+              Load More
+            </button>
+          </div>
+        )}
       </div>
     </Layout>
   );

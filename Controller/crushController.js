@@ -96,6 +96,7 @@ module.exports.addToCrush = async (req, res) => {
 
 module.exports.removeFromCrush = async (req, res) => {
     try {
+        // const pid = req.body.pid;
         const pid = req.params.pid;
 
         // Update the crushlist by removing the specified pid
