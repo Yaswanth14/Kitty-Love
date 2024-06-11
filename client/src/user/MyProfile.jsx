@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import Layout from "./../Components/Layout/Layout";
+import Layout from "./../components/Layout/Layout";
 import { useNavigate, useParams } from "react-router-dom";
 // import '../styles/MyProfile.css'
 
