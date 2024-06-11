@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import StatusCard from "./StatusCard";
 import ProfileSuggestionCard from "./ProfileSuggestionCard";
 import { useAuth } from "../../context/Auth";
+import Loader from "../../Loader";
 
 const StatusContainer = () => {
   const [message, setMessage] = useState("");
@@ -91,6 +92,7 @@ const StatusContainer = () => {
       </div>
       <div className="pt-[90px] flex min-[1050px]:space-x-5 min-[1050px]:px-5">
         <div className="flex-1">
+          {status.length == 0 && <Loader text="Loading anonymous messages" />}
           {status?.map((status, index) => (
             <StatusCard data={status} key={index} userId={auth.user._id} />
           ))}
@@ -100,6 +102,7 @@ const StatusContainer = () => {
           <ProfileSuggestionCard />
           <ProfileSuggestionCard />
           <ProfileSuggestionCard /> */}
+          {suggestions.length == 0 && <Loader text="Loading suggestions" />}
           {suggestions.map((e, i) => (
             <ProfileSuggestionCard key={i} data={e} />
           ))}
