@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 function ProfileSuggestionCard({ data }) {
   return (
-    <div className="flex justify-between px-3 bg-[#1b1735] rounded-md py-3 items-center">
+    <div className="flex justify-between px-3 bg-[#1b1735] rounded-md py-3 items-center my-2">
       <div className="flex space-x-3">
         <img
           src={
@@ -16,7 +16,7 @@ function ProfileSuggestionCard({ data }) {
           alt=""
         />
 
-        <div>
+        <div className="w-[100px]">
           <p>{data.name}</p>
           <p className="text-sm font-light">{data.username}</p>
         </div>

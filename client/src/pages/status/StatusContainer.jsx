@@ -98,10 +98,6 @@ const StatusContainer = () => {
           ))}
         </div>
         <div className="w-[400px] pt-3 max-[1050px]:hidden">
-          {/* <ProfileSuggestionCard />
-          <ProfileSuggestionCard />
-          <ProfileSuggestionCard />
-          <ProfileSuggestionCard /> */}
           {suggestions.length == 0 && <Loader text="Loading suggestions" />}
           {suggestions.map((e, i) => (
             <ProfileSuggestionCard key={i} data={e} />
