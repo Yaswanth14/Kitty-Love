@@ -52,6 +52,7 @@ const StatusContainer = () => {
         }
       );
       setStatus([response.data.status, ...status]);
+      setMessage("");
       toast.success(response.message);
     } catch (error) {
       console.log(error);
