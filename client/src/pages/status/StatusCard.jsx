@@ -18,17 +18,21 @@ function StatusCard({ data, userId }) {
   const handleLike = async (like) => {
     try {
       if (like) {
+        setLike(false);
+        setLikeCount(likeCount - 1);
         await axios.post(
           `${import.meta.env.VITE_API}/status/like/${data._id}/0`
         );
-        setLike(false);
-        setLikeCount(likeCount - 1);
+        // setLike(false);
+        // setLikeCount(likeCount - 1);
       } else {
+        setLike(true);
+        setLikeCount(likeCount + 1);
         await axios.post(
           `${import.meta.env.VITE_API}/status/like/${data._id}/1`
         );
-        setLike(true);
-        setLikeCount(likeCount + 1);
+        // setLike(true);
+        // setLikeCount(likeCount + 1);
       }
     } catch (error) {
       console.error("Error updating like status:", error);
@@ -73,7 +77,7 @@ function StatusCard({ data, userId }) {
           <div className="flex items-center space-x-1">
             {like ? (
               <FavoriteIcon
-                className="text-[#f84b4d] transform transition-transform duration-75 ease-linear hover:scale-150 cursor-pointer"
+                className="text-[#f84b4d] transform transition-transform duration-75 ease-linear cursor-pointer"
                 onClick={() => handleLike(true)}
                 fontSize="small"
               />
@@ -86,11 +90,12 @@ function StatusCard({ data, userId }) {
             )}
             <p className="text-[10px]">{likeCount} likes</p>
           </div>
-          <div
-            className="flex items-center space-x-1"
-            onClick={() => setCommentBox(true)}
-          >
-            <CommentIcon fontSize="small" className="cursor-pointer" />
+          <div className="flex items-center space-x-1">
+            <CommentIcon
+              fontSize="small"
+              className="cursor-pointer"
+              onClick={() => setCommentBox(true)}
+            />
             <p className="text-[10px]">replies</p>
           </div>
         </div>

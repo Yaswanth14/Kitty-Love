@@ -5,6 +5,7 @@ import Layout from "./../Components/Layout/Layout";
 import { useNavigate } from "react-router-dom";
 import "../styles/TableStyles.css";
 import { useAuth } from "../context/Auth";
+import Loader from "../Loader";
 
 const UserDetailsCard = ({ user, removeFromCrushlist }) => (
   <tr key={user._id}>
@@ -29,6 +30,7 @@ const Dashboard = () => {
   const [crushUsers, setCrushUsers] = useState([]);
   const [dms, setDms] = useState([]);
   const [isPrivate, setIsPrivate] = useState(false);
+  const [crushFetch, setcrushFetch] = useState(false);
 
   useEffect(() => {
     const getDms = async () => {
@@ -58,6 +60,7 @@ const Dashboard = () => {
         const usersData = await Promise.all(promises);
         const users = usersData.map((res) => res.data);
         setCrushUsers(users);
+        setcrushFetch(true);
       } catch (error) {
         console.error("Error fetching crush users:", error);
         toast.error("Failed to fetch crush users");
@@ -121,6 +124,12 @@ const Dashboard = () => {
                 ))}
               </tbody>
             </table>
+            {crushUsers.length == 0 && !crushFetch && (
+              <Loader text={"loading your crush list..."} />
+            )}
+            {crushUsers.length == 0 && crushFetch && (
+              <p className="text-center">No crush yet! Why??</p>
+            )}
           </div>
 
           <div className="pl-5 flex-1 max-[1200px]:pl-1">
@@ -139,6 +148,7 @@ const Dashboard = () => {
                 </label>
               </div>
               <div className="flex flex-col max-h-[calc(100vh-100px)] max-[1200px]:max-h-[30vh] overflow-y-scroll">
+                {dms.length == 0 && <Loader text={"loading dms..."} />}
                 <ul className="text-lg">
                   {dms
                     .slice()
