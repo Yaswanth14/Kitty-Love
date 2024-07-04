@@ -83,7 +83,7 @@ const Signin = () => {
           </button>
           <center>
             <p>
-              Forgot Passowrd? <Link to={"/forgotpass"}>Reset</Link>
+              <Link to={"/forgotpass"}>Forgot Password?</Link>
             </p>
           </center>
         </form>

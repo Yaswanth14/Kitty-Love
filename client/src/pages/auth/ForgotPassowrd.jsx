@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
-import Layout from "../../components/Layout/Layout";
+import Layout from "../../Components/Layout/Layout";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const [otp, setOtp] = useState("");
   const [otpScreen, setOtpScreen] = useState(false);
   const navigate = useNavigate();
@@ -32,6 +33,9 @@ const ForgotPassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password !== password2) {
+      return toast.error("Password's didn't match!");
+    }
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_API}/user/forgot-password/verify`,
@@ -58,12 +62,12 @@ const ForgotPassword = () => {
 
   return (
     <Layout>
-      <div className="flex flex-col justify-center items-center h-screen w-screen text-[white] font-semibold">
+      <div className="mt-[50px] flex flex-col justify-center items-center h-screen w-screen text-[white] font-semibold">
         <form
           onSubmit={handleSubmit}
           className="gradient_bg py-3 rounded-lg flex flex-col px-5"
         >
-          <h1 className="-translate-y-10 text-5xl font-extrabold flex justify-center text_shadow">
+          <h1 className="-translate-y-10 text-3xl font-extrabold flex justify-center text_shadow text-center">
             Forgot Password
           </h1>
 
@@ -86,14 +90,21 @@ const ForgotPassword = () => {
                 className="bg-transparent outline-none placeholder:text-white text-xl py-2 border-b-2 my-2"
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <input
+                value={password2}
+                type="password"
+                placeholder="Confirm password"
+                className="bg-transparent outline-none placeholder:text-white text-xl py-2 border-b-2 my-2"
+                onChange={(e) => setPassword2(e.target.value)}
+              />
             </div>
           ) : (
-            <div>
+            <div className="flex">
               <input
                 value={email}
                 type="email"
                 placeholder="Domain Email"
-                className="bg-transparent outline-none placeholder:text-white text-xl py-2 border-b-2 my-2"
+                className="bg-transparent w-full outline-none placeholder:text-white text-xl py-2 border-b-2 my-2"
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
@@ -118,7 +129,10 @@ const ForgotPassword = () => {
         </form>
         <br />
         <p>
-          Remembered your password? <Link to={"/signin"}>Signin</Link>{" "}
+          Remembered your password?{" "}
+          <Link to={"/signin"} className="font-bold">
+            Signin
+          </Link>{" "}
         </p>
       </div>
     </Layout>
