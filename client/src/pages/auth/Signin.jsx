@@ -81,6 +81,11 @@ const Signin = () => {
           >
             Login
           </button>
+          <center>
+            <p>
+              Forgot Passowrd? <Link to={"/forgotpass"}>Reset</Link>
+            </p>
+          </center>
         </form>
 
         <br />
