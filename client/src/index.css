@@ -5,6 +5,7 @@
 body {
   background-color: #151128;
   color: white;
+  overflow-x: hidden;
 }
 
 .gradient_bg {

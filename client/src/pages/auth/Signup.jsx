@@ -9,6 +9,7 @@ import { useAuth } from "../../context/Auth";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
   const [auth, setAuth] = useAuth();
@@ -34,6 +35,9 @@ const Signup = () => {
   // Form function
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password !== password2) {
+      return toast.error("Password's didn't match!");
+    }
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_API}/user/signup/verify`,
@@ -71,7 +75,7 @@ const Signup = () => {
       <div className="flex flex-col justify-center items-center h-screen w-screen text-[white] font-semibold">
         <form
           onSubmit={handleSubmit}
-          className="gradient_bg py-3 rounded-lg flex flex-col px-5"
+          className="gradient_bg py-3 rounded-lg flex flex-col px-5 mt-[50px]"
         >
           <h1 className="-translate-y-10 text-5xl font-extrabold flex justify-center text_shadow">
             Register
@@ -112,6 +116,15 @@ const Signup = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
+              <div>
+                <input
+                  value={password2}
+                  type="password"
+                  placeholder="Confirm password"
+                  className="bg-transparent outline-none placeholder:text-white text-xl py-2 border-b-2 my-2"
+                  onChange={(e) => setPassword2(e.target.value)}
+                />
+              </div>
             </>
           )}
 
@@ -127,6 +140,9 @@ const Signup = () => {
               onClick={() => {
                 sendOTP();
                 if ((email !== "") & (password !== "")) {
+                  if (password !== password2) {
+                    return toast.error("Password's didn't match!");
+                  }
                   setOtpScreen(true);
                 }
               }}
