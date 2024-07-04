@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import Layout from "./../components/Layout/Layout";
+import Layout from "./../Components/Layout/Layout";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import SearchIcon from "@mui/icons-material/Search";
 import { useSearchParams } from "react-router-dom";
 import { debounce } from "lodash";
+import Loader from "../Loader";
 
 const Profiles = () => {
   const [profiles, setProfiles] = useState([]);
@@ -163,6 +164,8 @@ const Profiles = () => {
           </div>
         </div>
         {/*  */}
+
+        {profiles.length == 0 && <Loader text="Loading profiles" />}
         <div className="flex flex-wrap p-2 items-stretch justify-evenly">
           {profiles?.map((user, index) => (
             <Link to={`/profile/${user.username}`} key={index}>

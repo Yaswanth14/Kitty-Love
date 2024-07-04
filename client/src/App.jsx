@@ -6,7 +6,7 @@ import Signup from "./pages/auth/Signup";
 import Signin from "./pages/auth/Signin";
 import ForgotPassword from "./pages/auth/ForgotPassowrd";
 import PageNotFound from "./pages/PageNotFound";
-import PrivateRoute from "./components/Routes/Private";
+import PrivateRoute from "./Components/Routes/Private";
 import Profiles from "./user/Profiles";
 import Dashboard from "./user/Dashboard";
 import MyProfile from "./user/MyProfile";

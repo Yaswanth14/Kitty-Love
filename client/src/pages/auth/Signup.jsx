@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
-import Layout from "../../components/Layout/Layout";
+// import "../../styles/AuthStyles.css";
+import Layout from "../../Components/Layout/Layout";
 import { useAuth } from "../../context/Auth";
 
 const Signup = () => {
