@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import HomePage from "./pages/HomePage";
 import Signup from "./pages/auth/Signup";
 import Signin from "./pages/auth/Signin";
+import ForgotPassword from "./pages/auth/ForgotPassowrd";
 import PageNotFound from "./pages/PageNotFound";
 import PrivateRoute from "./components/Routes/Private";
 import Profiles from "./user/Profiles";
@@ -37,6 +38,7 @@ function App() {
         <Route path="profile/:username" element={<UserProfile />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/forgotpass" element={<ForgotPassword />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>

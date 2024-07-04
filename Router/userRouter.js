@@ -1,5 +1,11 @@
 const { Router } = require("express");
-const { signUp, verifyOtp, signIn } = require("../Controller/userController");
+const {
+  signUp,
+  verifyOtp,
+  signIn,
+  sendOtpForPasswordReset,
+  verifyOtpAndResetPassword,
+} = require("../Controller/userController");
 const {
   updateProfile,
   getProfiles,
@@ -24,6 +30,9 @@ const userMiddleware = require("../middleware/authMiddleware");
 router.post("/signup", signUp); // Sign Up Route
 router.post("/signup/verify", verifyOtp); // Verify OTP Route
 router.post("/signin", signIn); // Sign In Route
+
+router.post("/forgot-password", sendOtpForPasswordReset);
+router.post("/forgot-password/verify", verifyOtpAndResetPassword);
 
 router.put("/update/:pid", userMiddleware, formidable(), updateProfile); // Update Profile Route
 router.get("/profiles", userMiddleware, getProfiles); // Get all profiles route
