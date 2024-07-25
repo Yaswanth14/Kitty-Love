@@ -25,7 +25,7 @@ module.exports.Status = model(
       createdAt: {
         type: Date,
         default: Date.now,
-        index: { expires: 60 * 60 * 24 * 7 },
+        // index: { expires: 4 * 60 * 60 * 24 * 7 },
       },
     },
     { timestamps: true }

@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import girlImage from "../../assets/2.jpg";
 import boyImage from "../../assets/1.jpg";
+import friendsImage from "../../assets/friends.jpg";
 import anonymousImage from "../../assets/3.jpg";
 import crushListImage from "../../assets/4.jpg";
 import profilesImage from "../../assets/5.jpg";
@@ -13,34 +14,44 @@ const HomeContainer = () => {
   return (
     <div className="pt-[100px] px-3">
       <p className="lead text-center">
-        You have a secret crush on a person that you can't express, right?
+        A place where we GVPians can talk, express and laugh together,
+        everything
+        <strong> anonymously</strong>.
       </p>
       <h1 className="text-5xl font-bold text-center text-pink-600 mt-5">
-        Welcome to KITTY LOVE 💕
+        Welcome to KITTY LOVE
       </h1>
-      <p className="text-center mb-5 mt-2">
-        A dating site espeacially made for GVPians.
+      <p className="text-center mb-5 mt-3">
+        A social networking and dating site made espeacially for GVPians. (A
+        facebook for GVP, but better)
       </p>
       <p className="lead text-center">
-        A place where you are free to express your love. Don't worry it's secure
+        A place where you are free to express yourself. Don't worry it's secure
         and anonymous 🤫
       </p>
       {/*  */}
-      <div className="flex h-[64] my-5 p-3 text-xl space-x-2 flex-wrap max-[1300px]:flex-col items-center">
-        <div className="flex space-x-2">
+      <div className="flex justify-center h-[64] my-5 text-xl space-x-2 flex-wrap max-[1300px]:flex-col items-center">
+        <div className="flex">
+          <img
+            src={friendsImage}
+            alt=""
+            className="rounded-md h-64 max-[800px]:h-[150px]"
+          />
+        </div>
+        <div className="flex space-x-2 max-[1300px]:mt-3">
           <img
             src={girlImage}
             alt=""
-            className="w-64 h-64 rounded-md max-[600px]:w-[150px] max-[600px]:h-[150px]"
+            className="w-64 h-64 rounded-md max-[800px]:w-[150px] max-[800px]:h-[150px]"
           />
           <img
             src={boyImage}
             alt=""
-            className="w-64 h-64 rounded-md max-[600px]:w-[150px] max-[600px]:h-[150px]"
+            className="w-64 h-64 rounded-md max-[800px]:w-[150px] max-[800px]:h-[150px]"
           />
         </div>
 
-        <div className="mt-8 text-center flex-1">
+        {/* <div className="mt-8 text-center flex-1">
           <h3 className="text-3xl font-bold text-pink-600">Spread the Love</h3>
           <p className="text-gray-600 mt-2">
             "Love is in the air! Sign up now and find your special someone at
@@ -54,7 +65,7 @@ const HomeContainer = () => {
             "Find your match, make a connection, and start a story worth
             telling."
           </p>
-        </div>
+        </div> */}
       </div>
       {/*  */}
 
@@ -74,9 +85,9 @@ const HomeContainer = () => {
             </h2>
 
             <p className="text-gray-600">
-              Share your thoughts and public confessions with your crush
-              anonymously. No one will ever know it's you. Add replies and likes
-              to messages to keep the conversation going.
+              Share your thoughts and express yourself anonymously, no one will
+              ever know it was you. Add replies and likes to messages to keep
+              the conversation going.
             </p>
           </div>
           <img
@@ -99,7 +110,7 @@ const HomeContainer = () => {
 
             <p className="text-gray-600">
               Add up to 3 people to your crush list. Update your crushes anytime
-              from your dashboard and see who else is crushing on you.
+              from your dashboard and know who else is crushing on you.
             </p>
           </div>
         </div>
@@ -111,9 +122,8 @@ const HomeContainer = () => {
             </h2>
 
             <p className="text-gray-600">
-              View profiles of all users on the app. Check out their crush
-              counts, display pictures, and public messages. Find your potential
-              match easily!
+              View profiles of all GVPians on the site. Check out their crush
+              counts, display pictures, and public messages.
             </p>
           </div>
           <img
@@ -146,12 +156,12 @@ const HomeContainer = () => {
         <div className="bg-[#1b1735] p-3 rounded-lg shadow-lg flex justify-between items-center space-x-3 w-[70vw] max-[1000px]:w-[90vw] max-[1000px]:flex-col-reverse">
           <div className="ml-2">
             <h2 className="text-3xl font-semibold text-gray-400 mb-2">
-              Search Your Crush
+              Looking for someone?
             </h2>
 
             <p className="text-gray-600">
-              Find your crush by searching their name or college mail ID. Get
-              closer to making a connection.
+              Find GVPians by searching their name, roll number or college mail
+              ID.
             </p>
           </div>
           <img
