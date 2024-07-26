@@ -49,4 +49,58 @@ const Sendmail = async (pid, userId) => {
   }
 };
 
-module.exports = Sendmail;
+const sendNotification = async (email, subject, htmlmsg) => {
+  try {
+    // const user = await User.findOne({
+    //   email: req.body.email,
+    // });
+    // const email = req.body.email;
+
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        // TODO: replace `user` and `pass` values from <https://forwardemail.net>
+        user: process.env.AUTH_EMAIL,
+        pass: process.env.AUTH_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.AUTH_EMAIL,
+      to: email,
+      subject: subject,
+      // subject: "Someone sent you a message from your profile on KITTYLOVE",
+      html: htmlmsg,
+      // html: `
+      // <body>
+      //     <p>Someone on KITTY LOVE has sent you a message after viewing your profile. Want to see what it is? Go to <a href="https://mykittylove.vercel.app">https://mykittylove.vercel.app</a> and check for yourself.</p>
+      //     <br>
+      //     <p> From team KITTYLOVE
+      // </body>
+      // `,
+    };
+    await transporter
+      .sendMail(mailOptions)
+      .then(() => {
+        console.log("Email has been sent!");
+        // res
+        //   .status(200)
+        //   .json({ success: true, message: "Email has been sent!" });
+      })
+      .catch((err) => {
+        console.log("Error in sending Email : " + err);
+      });
+    return;
+  } catch (error) {
+    console.log(error);
+    // res.status(400).send({
+    //   success: false,
+    //   message: "Server Error",
+    // });
+  }
+};
+
+module.exports = { sendNotification, Sendmail };
